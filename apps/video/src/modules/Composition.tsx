@@ -1,9 +1,17 @@
-import {AbsoluteFill} from 'remotion';
+import { AbsoluteFill, Audio, Img, Sequence } from "remotion";
 
-export const MyComposition = () => {
-	return (
-		<AbsoluteFill className="items-center justify-center bg-gray-100">
-			<div>😭</div>
-		</AbsoluteFill>
-	);
+export const MyComposition = (props: { audioBuffer: string }) => {
+  return (
+    <AbsoluteFill className="items-center justify-center bg-black">
+      <Sequence name="Picture" from={10}>
+        <Img
+          src="https://scontent.fbkk22-4.fna.fbcdn.net/v/t39.30808-6/292021365_3093036167629961_7562457281644003836_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeGUPYjLoPBW1LMBOx8NSlmeEb-iMTUMPYwRv6IxNQw9jEzoJib2gZ0aCohEGfhhpPA-RMu8XvLzFXbgT6FYw0oo&_nc_ohc=_uBMEovuHlYAX-EeM13&_nc_ht=scontent.fbkk22-4.fna&oh=00_AfBOC4N3CZuKQDWldPKgqfQhE1drQgjGgA8hkxpVmoBpHA&oe=649BAC1E"
+          className="w-full h-full"
+        />
+      </Sequence>
+      <Sequence name="Audio">
+        <Audio src={props.audioBuffer} />
+      </Sequence>
+    </AbsoluteFill>
+  );
 };

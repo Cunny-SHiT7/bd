@@ -8,11 +8,11 @@ import { generateVoice } from "./utils";
   const app = express();
   app.use(express.json());
 
-  app.use(async (_req, res, next)  => {
+  app.use(async (_req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
-});
+  });
 
   app.post("/random", async (req, res) => {
     const name = req.body?.name;
@@ -49,7 +49,7 @@ import { generateVoice } from "./utils";
       `${randomMessage4}`;
 
     const voice = await generateVoice(
-      "ฮิฟูมินด็อตแอป เว็ปไซต์หาหนังโป๊เด็ก cunny ทับ c ทับ 9",
+      randomMessage,
       gender
     );
 

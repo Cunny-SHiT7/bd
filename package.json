@@ -1,0 +1,14 @@
+{
+  "name": "ooyupawnwankerd",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "start": "turbo run start"
+  },
+  "devDependencies": {
+    "turbo": "1.10.6",
+    "typescript": "^5.1.3"
+  }
+}

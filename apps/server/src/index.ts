@@ -1,17 +1,15 @@
-import http from 'http'
 import express from 'express'
 
 import { birthdayWishes } from './constant'
 
 //
-(async () => {
+(() => {
 const app = express()
 app.use(express.json())
 
 app.get('/', (_req, res) => { 
   res.send('OK')
 })
-
 
 app.post('/randomMessage', async (req, res) => {
 const { name } = req.body
@@ -27,7 +25,7 @@ const randomMessage = `${randomMessage1} ` + `${randomMessage2} ` + `${randomMes
 return res.status(200).json({ statusCode: 200, data: randomMessage })
 })
 
-http.createServer(app).listen(4000, 'localhost', () => {
+app.listen(4000, 'localhost', () => {
   console.log('Server running at http://localhost:4000')
 })
 })()

@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form"
 import { useMutation } from "react-query"
 import TestPreset from "../components/presets/TestPreset"
 import { getMessageFn } from "../functions/getMessage"
+import { nameAtom, promptAtom } from "../components/model/Atoms"
+import { useAtom } from "jotai"
 
 interface GenerateMessageProps {
     name: string
@@ -12,16 +14,20 @@ interface GenerateMessageProps {
 const GenerateForm = () => {
     const { register, handleSubmit } = useForm<GenerateMessageProps>()
 
+    const [, setPrompt] = useAtom(promptAtom)
+    const [, setName] = useAtom(nameAtom)
+
     const handleGenerate = async (data: GenerateMessageProps) => {
         await handleFetch.mutateAsync({
             name: data.name,
             gender: data.gender
         })
+        setName(data.name)
     }
 
     const handleFetch = useMutation('prompt', getMessageFn, {
         onSuccess: (data) => {
-            console.log(data)
+            setPrompt(data.message)
         },
         onError: (error) => {
             console.error(error)

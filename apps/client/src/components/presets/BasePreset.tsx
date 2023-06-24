@@ -5,12 +5,14 @@ import { PlaceholderName, PlaceholderPrompt } from "./PlaceholderData"
 import { FC, ReactElement } from "react"
 
 export interface BasePreset {
-    disableShowName?: boolean
-    disableShowPrompt?: boolean
+    showName?: boolean
+    showPrompt?: boolean
     backgroundImageURL?: string
+    nameClassName?: string,
+    promptClassName?: string
 }
 
-const BasePreset: FC<{ children?: ReactElement } & BasePreset> = ({ children, disableShowName, disableShowPrompt, backgroundImageURL }) => {
+const BasePreset: FC<{ children?: ReactElement } & BasePreset> = ({ children, showName, showPrompt, backgroundImageURL, promptClassName, nameClassName }) => {
 
     const [name] = useAtom(nameAtom)
     const [prompt] = useAtom(promptAtom)
@@ -21,10 +23,10 @@ const BasePreset: FC<{ children?: ReactElement } & BasePreset> = ({ children, di
                 backgroundImageURL && <Img src={staticFile(backgroundImageURL)} className="z-0 w-full h-full" />
             }
             <div className="absolute inset-0 z-10">
-                {!disableShowName && <h1>
+                {showName && <h1 className={nameClassName}>
                     {name ? name : PlaceholderName}
                 </h1>}
-                {!disableShowPrompt && <p>
+                {showPrompt && <p className={promptClassName}>
                     {prompt ? prompt : PlaceholderPrompt}
                 </p>}
                 {

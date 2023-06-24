@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form"
 import PlaceholderPreset from "../components/presets/PlaceholderPreset"
 import { nameAtom, promptAtom } from "../components/model/Atoms"
 import { useAtom } from "jotai"
+import { useMutation, useQuery } from "react-query"
+import { fetchPrompt } from "../components/fetch/FetchPrompt"
 
 interface FormValue {
     name: string
@@ -14,11 +16,14 @@ const GenerateForm = () => {
     const [name, setName] = useAtom(nameAtom)
     const [prompt, setPrompt] = useAtom(promptAtom)
 
-    const handleGenerate = (data: FormValue) => {
+    const handleGenerate = async (data: FormValue) => {
         console.log(data)
+        await handleFetch.mutateAsync(data.name)
     }
 
+    const handleFetch = useMutation('prompt', fetchPrompt, {
 
+    })
 
     return (
         <div className="grid place-items-center min-h-screen">
@@ -32,8 +37,10 @@ const GenerateForm = () => {
                 />
             </div>
             <form onSubmit={handleSubmit(handleGenerate)}>
-                <input {...register('name')} type="text" placeholder="ชื่อของคุณ" className="p-1 border-2 border-black rounded-md"></input>
-                <button className="p-1 border-2 border-gray-600 rounded-md">Submit</button>
+                <div className="flex justify-center gap-x-2">
+                    <input {...register('name')} type="text" placeholder="ชื่อของคุณ" className="p-1 border-2 border-black rounded-md"></input>
+                    <button className="p-1 border-2 border-gray-600 rounded-md">Submit</button>
+                </div>
             </form>
         </div>
     )

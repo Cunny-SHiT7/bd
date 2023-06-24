@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "tsup src --watch --esm --onSuccess \"node dist/index.js\"",
+    "dev": "tsup src --watch --onSuccess \"node dist/index.js\"",
     "build": "tsup src/index.ts --minify --clean"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "chatgpt": "5.2.5",
     "express": "4.18.2"
   },

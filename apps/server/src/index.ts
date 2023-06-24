@@ -8,6 +8,12 @@ import { generateVoice } from "./utils";
   const app = express();
   app.use(express.json());
 
+  app.use(async (_req, res, next)  => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
   app.post("/random", async (req, res) => {
     const name = req.body?.name;
     const gender = req.body?.gender;

@@ -1,28 +1,31 @@
 import { Player } from "@remotion/player"
 import { useForm } from "react-hook-form"
 import PlaceholderPreset from "../components/presets/PlaceholderPreset"
-import { nameAtom, promptAtom } from "../components/model/Atoms"
-import { useAtom } from "jotai"
-import { useMutation, useQuery } from "react-query"
-import { fetchPrompt } from "../components/fetch/FetchPrompt"
+import { useMutation } from "react-query"
+import { getMessageFn } from "../functions/getMessage"
 
 interface FormValue {
     name: string
 }
 
 const GenerateForm = () => {
-
     const { register, handleSubmit } = useForm<FormValue>()
-    const [name, setName] = useAtom(nameAtom)
-    const [prompt, setPrompt] = useAtom(promptAtom)
+
 
     const handleGenerate = async (data: FormValue) => {
-        console.log(data)
-        await handleFetch.mutateAsync(data.name)
+        await handleFetch.mutateAsync({
+            name: data.name,
+            gender: 'MALE'
+        })
     }
 
-    const handleFetch = useMutation('prompt', fetchPrompt, {
-
+    const handleFetch = useMutation('prompt', getMessageFn, {
+        onSuccess: (data) => {
+            console.log(data)
+        },
+        onError: (error) => {
+            console.error(error)
+        }
     })
 
     return (

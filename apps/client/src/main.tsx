@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom/client'
 import App from './pages/App.tsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import VideoPlaceholder from './pages/VideoPlaceholder.tsx'
-import GenerateForm from './pages/BirthdayPage.tsx'
-import GusRemotionDemo from './pages/GusRemotionDemo.tsx'
 import { QueryClientProvider, QueryClient } from 'react-query'
+import SharePage from './pages/SharePage.tsx'
 
 const client = new QueryClient()
 
@@ -16,16 +14,8 @@ const routes = createBrowserRouter([
     element: <App />,
   },
   {
-    path: '/videodemo',
-    element: <VideoPlaceholder />,
-  },
-  {
-    path: '/formdemo',
-    element: <GenerateForm />,
-  },
-  {
-    path: '/gus',
-    element: <GusRemotionDemo />,
+    path: '/share/:theme/:name',
+    element: <SharePage />,
   },
 ])
 

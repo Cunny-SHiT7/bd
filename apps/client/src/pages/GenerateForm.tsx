@@ -6,24 +6,30 @@ import { useAtom } from "jotai"
 import { useMutation, useQuery } from "react-query"
 import { fetchPrompt } from "../components/fetch/FetchPrompt"
 import TestPreset from "../components/presets/TestPreset"
+import { getMessageFn } from "../functions/getMessage"
 
-interface FormValue {
+interface GenerateMessageProps {
     name: string
+    gender: "MALE" | "FEMALE"
 }
 
 const GenerateForm = () => {
+    const { register, handleSubmit } = useForm<GenerateMessageProps>()
 
-    const { register, handleSubmit } = useForm<FormValue>()
-    const [name, setName] = useAtom(nameAtom)
-    const [prompt, setPrompt] = useAtom(promptAtom)
-
-    const handleGenerate = async (data: FormValue) => {
-        console.log(data)
-        await handleFetch.mutateAsync(data.name)
+    const handleGenerate = async (data: GenerateMessageProps) => {
+        await handleFetch.mutateAsync({
+            name: data.name,
+            gender: data.gender
+        })
     }
 
-    const handleFetch = useMutation('prompt', fetchPrompt, {
-
+    const handleFetch = useMutation('prompt', getMessageFn, {
+        onSuccess: (data) => {
+            console.log(data)
+        },
+        onError: (error) => {
+            console.error(error)
+        }
     })
 
     return (
@@ -39,7 +45,11 @@ const GenerateForm = () => {
             </div>
             <form onSubmit={handleSubmit(handleGenerate)}>
                 <div className="flex justify-center gap-x-2">
-                    <input {...register('name')} type="text" placeholder="ชื่อของคุณ" className="p-1 border-2 border-black rounded-md"></input>
+                    <input {...register('name')} type="text" placeholder="ชื่อของคุณ" className="p-1 border-2 border-black rounded-md" />
+                    <select {...register('gender')}>
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>
+                    </select>
                     <button className="p-1 border-2 border-gray-600 rounded-md">Submit</button>
                 </div>
             </form>

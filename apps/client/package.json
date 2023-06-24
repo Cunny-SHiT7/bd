@@ -12,6 +12,7 @@
     "@remotion/cli": "3.3.102",
     "@remotion/player": "^3.3.102",
     "@remotion/tailwind": "3.3.102",
+    "axios": "^1.4.0",
     "jotai": "^2.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

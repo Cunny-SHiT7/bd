@@ -1,2 +1,2 @@
-export const PlaceholderName = "NAME";
-export const PlaceholderPrompt = "PLACEHOLDER PROMPT GOES HERE";
+export const PlaceholderName = 'NAME'
+export const PlaceholderPrompt = 'PLACEHOLDER PROMPT GOES HERE'

@@ -1,7 +1,9 @@
+import BirthdayPage from "./BirthdayPage"
+
 function App() {
   return (
     <>
-      <h1>Landing Page</h1>
+      <BirthdayPage />
     </>
   )
 }

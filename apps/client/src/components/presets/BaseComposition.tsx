@@ -1,35 +1,34 @@
 import { useAtom } from 'jotai'
 import { AbsoluteFill, Audio, Img, Sequence, staticFile } from 'remotion'
 import {
-  audioBufferAtom,
-  audioDataURLAtom,
   nameAtom,
   promptAtom,
 } from '../model/UserAtom'
-import { PlaceholderName, PlaceholderPrompt } from './PlaceholderData'
-import { FC, ReactElement, useMemo } from 'react'
+import { PlaceholderName, PlaceholderPrompt } from './Preset'
+import { FC } from 'react'
 import { VIDEO_FRAMES_PER_SECOND } from '../model/VideoMetaAtom'
 
 export interface BasePreset {
+  children?: React.ReactNode
   showName?: boolean
   showPrompt?: boolean
   backgroundImageURL?: string
   nameClassName?: string
   promptClassName?: string
+  audioURL?: string
 }
 
-const BasePreset: FC<{ children?: ReactElement } & BasePreset> = ({
+const BaseComposition: FC<BasePreset> = ({
   children,
   showName,
   showPrompt,
   backgroundImageURL,
   promptClassName,
   nameClassName,
+  audioURL
 }) => {
   const [name] = useAtom(nameAtom)
   const [prompt] = useAtom(promptAtom)
-
-  const [audioURL] = useAtom(audioDataURLAtom)
 
   return (
     <AbsoluteFill className="bg-red-100">
@@ -59,4 +58,4 @@ const BasePreset: FC<{ children?: ReactElement } & BasePreset> = ({
   )
 }
 
-export default BasePreset
+export default BaseComposition

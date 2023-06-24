@@ -5,7 +5,7 @@ export const DefaultPreset = (props: { audioBuffer: string }) => {
   return (
     <BaseComposition
       audioBuffer={props.audioBuffer}
-      anounceDelay={20}
+      voiceDelay={20}
       pictureDelay={20}
     >
       <Sequence from={20} className="z-10 scale-[2] tranform">

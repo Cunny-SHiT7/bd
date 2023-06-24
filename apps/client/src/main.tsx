@@ -4,7 +4,7 @@ import App from './pages/App.tsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import VideoPlaceholder from './pages/VideoPlaceholder.tsx'
-import GenerateForm from './pages/GenerateForm.tsx'
+import GenerateForm from './pages/BirthdayPage.tsx'
 import GusRemotionDemo from './pages/GusRemotionDemo.tsx'
 import { QueryClientProvider, QueryClient } from 'react-query'
 

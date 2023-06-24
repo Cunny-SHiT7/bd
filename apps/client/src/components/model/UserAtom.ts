@@ -15,5 +15,5 @@ export const voiceAtom = atom("");
 /**
  *
  */
-export const audioBufferAtom = atom<AudioBuffer | undefined>("");
+export const audioBufferAtom = atom<AudioBuffer | undefined>(undefined);
 export const audioDataURLAtom = atom<string | undefined>(undefined);

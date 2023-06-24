@@ -7,10 +7,9 @@ import express from 'express'
 import { birthdayWishes } from './constant'
 import { generateVoice } from './utils'
 
-//
 import axios from 'axios'
-import { audioBufferToDataUrl } from '@remotion/media-utils'
-;(() => {
+
+(() => {
   const app = express()
   app.use(
     express.json({
@@ -18,7 +17,6 @@ import { audioBufferToDataUrl } from '@remotion/media-utils'
     })
   )
 
-  const cache = new Map<string, string>()
   const compositionId = 'MyComposition'
 
   app.use(async (_req, res, next) => {
@@ -55,10 +53,6 @@ import { audioBufferToDataUrl } from '@remotion/media-utils'
     const { name, gender } = req.body
 
     try {
-      if (cache.get(JSON.stringify(req.query))) {
-        sendFile(cache.get(JSON.stringify(req.query)) as string)
-        return
-      }
       const response = (
         await axios.post<{
           data: {
@@ -70,19 +64,16 @@ import { audioBufferToDataUrl } from '@remotion/media-utils'
           gender,
         })
       ).data
-
-      // Parse base64 to ArrayBuffer
-      const arrayBuffer = Uint8Array.from(atob(response.data.voice), c =>
-        c.charCodeAt(0)
-      )
+      const inputProps = {
+        voice: response.data.voice,
+        message: response.data.message,
+      }
 
       const bundled = await bundle(path.join(__dirname, '../remotion/index.ts'))
       // Extract all the compositions you have defined in your project
       // from the webpack bundle.
       const comps = await getCompositions(bundled, {
-        inputProps: {
-          arrayBuffer,
-        },
+        inputProps
       })
 
       // Select the composition you want to render.
@@ -94,14 +85,16 @@ import { audioBufferToDataUrl } from '@remotion/media-utils'
       }
 
       const outputLocation = `out/${compositionId}.mp4`
-      console.log('Attempting to render:', outputLocation)
       await renderMedia({
         composition,
         serveUrl: bundled,
         codec: 'h264',
         outputLocation,
+        inputProps
       })
-      cache.set(JSON.stringify(req.query), outputLocation)
+
+
+
       sendFile(outputLocation)
     } catch (err) {
       console.error(err)

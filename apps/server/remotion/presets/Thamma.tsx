@@ -1,11 +1,11 @@
 import { Audio, Sequence, Video, staticFile } from 'remotion'
 import { BaseComposition } from '../Composition'
 
-export const ThammaPreset = (props: { audioBuffer: string }) => {
+export const ThammaPreset = (props: { voiceData: string }) => {
   return (
     <BaseComposition
-      audioBuffer={props.audioBuffer}
-      anounceDelay={20}
+      audioBuffer={props.voiceData}
+      voiceDelay={20}
       pictureDelay={20}
     >
       <Sequence from={20} className="z-10 scale-[2] tranform">

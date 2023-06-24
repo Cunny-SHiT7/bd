@@ -1,11 +1,11 @@
 import { Audio, Sequence, Video, staticFile } from 'remotion'
-import { BaseComposition } from '../modules/Composition'
+import { BaseComposition } from '../Composition'
 
-export const FamilyPreset = (props: { audioBuffer: string }) => {
+export const SadPreset = (props: { audioBuffer: string }) => {
   return (
     <BaseComposition
       audioBuffer={props.audioBuffer}
-      voiceDelay={20}
+      anounceDelay={20}
       pictureDelay={20}
     >
       <Sequence from={20} className="z-10 scale-[2] tranform">

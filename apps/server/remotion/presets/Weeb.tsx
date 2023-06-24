@@ -1,5 +1,5 @@
-import { Audio, Sequence, Video, staticFile } from "remotion";
-import { BaseComposition } from "../modules/Composition";
+import { Audio, Sequence, Video, staticFile } from 'remotion'
+import { BaseComposition } from '../Composition'
 
 export const SaiyorPreset = (props: { audioBuffer: string }) => {
   return (
@@ -11,11 +11,11 @@ export const SaiyorPreset = (props: { audioBuffer: string }) => {
       <Sequence from={20} className="z-10 scale-[2] tranform">
         <Video
           muted
-          src={staticFile("rodhae.mp4")}
+          src={staticFile('rodhae.mp4')}
           className="z-10 w-full opacity-30"
         />
       </Sequence>
-      <Audio src={staticFile("saiyor.mp3")} volume={0.4} />
+      <Audio src={staticFile('saiyor.mp3')} volume={0.4} />
     </BaseComposition>
-  );
-};
+  )
+}

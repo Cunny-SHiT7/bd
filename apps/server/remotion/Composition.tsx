@@ -1,7 +1,6 @@
 import React from 'react'
 import { AbsoluteFill, Audio, Img, Sequence, staticFile } from 'remotion'
 import { Gif } from '@remotion/gif'
-import { random } from 'remotion'
 
 export const BaseComposition = (props: {
   audioBuffer: string

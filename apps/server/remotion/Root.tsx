@@ -1,8 +1,8 @@
 import { Composition, continueRender, delayRender } from 'remotion'
 import { useCallback, useEffect, useState } from 'react'
 import { audioBufferToDataUrl } from '@remotion/media-utils'
-import '../styles/style.css'
-import { FamilyPreset } from '../presets/Family'
+import { FamilyPreset } from './presets/Family'
+import './styles/style.css'
 
 export const RemotionRoot: React.FC = () => {
   const [audioBuffer, setAudioBuffer] = useState<string | null>(null)

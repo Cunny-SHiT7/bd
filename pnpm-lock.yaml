@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 importers:
 
   .:
@@ -12,10 +8,10 @@ importers:
         specifier: ^20.3.1
         version: 20.3.1
       dotenv:
-        specifier: ^16.3.1
+        specifier: 16.3.1
         version: 16.3.1
       dotenv-cli:
-        specifier: ^7.2.1
+        specifier: 7.2.1
         version: 7.2.1
       tsup:
         specifier: 7.0.0
@@ -5467,3 +5463,7 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false

@@ -8,3 +8,12 @@ export const nameAtom = atom("");
  * From backend
  */
 export const promptAtom = atom("");
+/**
+ * Voice from backend
+ */
+export const voiceAtom = atom("");
+/**
+ *
+ */
+export const audioBufferAtom = atom<AudioBuffer | undefined>("");
+export const audioDataURLAtom = atom<string | undefined>(undefined);

@@ -5,11 +5,15 @@ import { themes } from "../components/presets/Preset"
 import { nameAtom, promptAtom, voiceAtom } from "../components/model/UserAtom"
 import { useAtom } from "jotai"
 import { useMutation } from "react-query"
-import { getMessageFn } from "../functions/getMessage"
-import { useEffect, useMemo } from "react"
+import { getVideoFn } from "../functions/getMessage"
+import { useEffect, useMemo, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 
 const SharePage = () => {
+
+    // VDO URL State
+    const [videoURL, setVideoURL] = useState('')
+    // Fetch status target
 
     const { theme: themeKey, name } = useParams<{
         theme: string,
@@ -27,14 +31,9 @@ const SharePage = () => {
         return themes.find(theme => theme.key === themeKey)
     }, [themeKey])
 
-    const [, setPrompt] = useAtom(promptAtom)
-    const [, setName] = useAtom(nameAtom)
-    const [, setVoice] = useAtom(voiceAtom)
-
-    const handleFetch = useMutation('prompt', getMessageFn, {
+    const handleFetch = useMutation('prompt', getVideoFn, {
         onSuccess: data => {
-            setPrompt(data.message)
-            setVoice(data.voice)
+            setVideoURL(data.url)
         },
         onError: error => {
             console.error(error)
@@ -42,33 +41,34 @@ const SharePage = () => {
     })
 
     useEffect(() => {
-        if (!name) return
+        if (!name || !theme?.key) return
 
-        setName(name)
 
         handleFetch.mutateAsync({
             name,
-            gender
+            gender,
+            theme: theme?.key
         })
     }, [name, gender])
 
-    const { duration } = useAudio()
 
-    const handleCopyLink = () => {
-        navigator.clipboard.writeText(location.pathname)
-        alert("ก็อบแล้วจ้า")
-    }
+    // const handleCopyLink = () => {
+    //     navigator.clipboard.writeText(location.pathname)
+    //     alert("ก็อบแล้วจ้า")
+    // }
 
     return (
         <div className="w-full min-h-screen flex flex-col gap-y-4 px-8 items-center justify-center">
             <h1 className="text-3xl">
                 มีคนกำลังส่งให้กับคุณ{name}
             </h1>
-            {duration && theme && <BirthdayPlayer duration={duration} theme={theme} />}
-            <button
+            {
+                videoURL && <video src={videoURL} />
+            }
+            {/* <button
                 onClick={handleCopyLink} className="border-2 rounded-md ">
                 ก็อบปี้ลิ้งค์เพื่อส่งต่อให้คนที่คุณรัก
-            </button>
+            </button> */}
         </div>
     )
 }

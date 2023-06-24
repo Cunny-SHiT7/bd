@@ -5,6 +5,7 @@ import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import VideoPlaceholder from './pages/VideoPlaceholder.tsx'
 import GenerateForm from './pages/GenerateForm.tsx'
+import GusRemotionDemo from './pages/GusRemotionDemo.tsx'
 
 const routes = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const routes = createBrowserRouter([
   {
     path: "/formdemo",
     element: <GenerateForm />
+  },
+  {
+    path: "/gus",
+    element: <GusRemotionDemo />
   }
 ])
 

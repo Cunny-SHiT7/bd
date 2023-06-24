@@ -7,6 +7,7 @@ import VideoPlaceholder from './pages/VideoPlaceholder.tsx'
 import GenerateForm from './pages/BirthdayPage.tsx'
 import GusRemotionDemo from './pages/GusRemotionDemo.tsx'
 import { QueryClientProvider, QueryClient } from 'react-query'
+import SharePage from './pages/SharePage.tsx'
 
 const client = new QueryClient()
 
@@ -16,8 +17,8 @@ const routes = createBrowserRouter([
     element: <App />,
   },
   {
-    path: '/videodemo',
-    element: <VideoPlaceholder />,
+    path: '/share/:theme/:name',
+    element: <SharePage />,
   },
   {
     path: '/formdemo',

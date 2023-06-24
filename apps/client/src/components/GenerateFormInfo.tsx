@@ -3,6 +3,9 @@ import { nameAtom, promptAtom, voiceAtom } from "./model/UserAtom"
 import { useForm } from "react-hook-form"
 import { useMutation } from "react-query"
 import { getMessageFn } from "../functions/getMessage"
+import { Link, useNavigate } from "react-router-dom"
+import { Theme, themes } from "./presets/Preset"
+import { useRef, useState } from "react"
 
 interface GenerateMessageProps {
     name: string
@@ -10,34 +13,42 @@ interface GenerateMessageProps {
 }
 
 const GenerateFormInfo = () => {
-    const [, setPrompt] = useAtom(promptAtom)
-    const [, setName] = useAtom(nameAtom)
-    const [, setVoice] = useAtom(voiceAtom)
+
+    const navigate = useNavigate()
+
+    const [theme, setTheme] = useState<Theme | undefined>(themes[0])
+    const Select = useRef<any>(null)
+
+    const [name, setName] = useAtom(nameAtom)
 
     const { register, handleSubmit } = useForm<GenerateMessageProps>()
 
     const handleGenerate = async (data: GenerateMessageProps) => {
-        await handleFetch.mutateAsync({
-            name: data.name,
-            gender: data.gender,
-        })
+        if (!theme?.key) return
         setName(data.name)
+        navigate(`/share/${theme?.key}/${data.name}?gender=${data.gender}`)
     }
 
-    const handleFetch = useMutation('prompt', getMessageFn, {
-        onSuccess: data => {
-            setPrompt(data.message)
-            setVoice(data.voice)
-        },
-        onError: error => {
-            console.error(error)
-        },
-    })
-
+    const handleSelect = () => {
+        if (!Select?.current?.value) return
+        setTheme(themes[Select.current.value])
+    }
 
     return (
         <form onSubmit={handleSubmit(handleGenerate)}>
             <div className="flex flex-col justify-center gap-y-2">
+                <div>
+                    <h1>เลือกธีมของท่าน</h1>
+                    <select className="w-full border-2 border-black px-1" ref={Select} onChange={handleSelect} >
+                        {
+                            themes.map((theme) => {
+                                return (
+                                    <option key={theme.key} value={theme.key}>{theme.display}</option>
+                                )
+                            })
+                        }
+                    </select>
+                </div>
                 <input
                     {...register('name', {
                         required: true
@@ -51,8 +62,8 @@ const GenerateFormInfo = () => {
                     <option value="MALE">เสียงบรรยายผู้ชาย</option>
                     <option value="FEMALE">เสียงบรรยายผู้หญิง</option>
                 </select>
-                <button className="p-1 border-2 border-gray-600 rounded-md">
-                    Submit
+                <button className="p-1 rounded-md bg-blue-400 text-white text-center font-bold">
+                    Generate
                 </button>
             </div>
         </form>

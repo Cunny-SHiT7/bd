@@ -1,5 +1,20 @@
 import axios from 'axios'
 
+export const uploadToMirai = async (file: File) => {
+  const formData = new FormData()
+  formData.append('file', file)
+  formData.append('uploadType', '0')
+  const { data } = await axios.post("https://up.m1r.ai/upload", formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+  if (!data.success || !data.data.url) {
+    throw new Error('Failed to upload to Mirai: ' + data.message)
+  }
+  return data
+}
+
 export const generateVoice = async (
   message: string,
   gender: 'MALE' | 'FEMALE'

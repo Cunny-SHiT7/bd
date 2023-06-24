@@ -4,29 +4,29 @@ import App from './pages/App.tsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import VideoPlaceholder from './pages/VideoPlaceholder.tsx'
-import GenerateForm from './pages/GenerateForm.tsx'
+import GenerateForm from './pages/BirthdayPage.tsx'
 import GusRemotionDemo from './pages/GusRemotionDemo.tsx'
 import { QueryClientProvider, QueryClient } from 'react-query'
 
-const client = new QueryClient();
+const client = new QueryClient()
 
 const routes = createBrowserRouter([
   {
-    path: "/",
-    element: <App />
+    path: '/',
+    element: <App />,
   },
   {
-    path: "/videodemo",
-    element: <VideoPlaceholder />
+    path: '/videodemo',
+    element: <VideoPlaceholder />,
   },
   {
-    path: "/formdemo",
-    element: <GenerateForm />
+    path: '/formdemo',
+    element: <GenerateForm />,
   },
   {
-    path: "/gus",
-    element: <GusRemotionDemo />
-  }
+    path: '/gus',
+    element: <GusRemotionDemo />,
+  },
 ])
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
@@ -34,5 +34,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <QueryClientProvider client={client}>
       <RouterProvider router={routes}></RouterProvider>
     </QueryClientProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 )

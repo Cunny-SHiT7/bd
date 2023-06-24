@@ -1,4 +1,4 @@
-import { registerRoot } from 'remotion';
-import { RemotionRoot } from './modules/Root';
+import { registerRoot } from 'remotion'
+import { RemotionRoot } from './modules/Root'
 
-registerRoot(RemotionRoot);
+registerRoot(RemotionRoot)

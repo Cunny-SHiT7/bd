@@ -22,7 +22,7 @@ const randomMessage3 = birthdayWishes[Math.floor(Math.random() * birthdayWishes.
 const randomMessage4 = birthdayWishes[Math.floor(Math.random() * birthdayWishes.length)].replace('_NAME_', name)
 const randomMessage = `${randomMessage1} ` + `${randomMessage2} ` + `${randomMessage3} ` + `${randomMessage4}`
 
-return res.status(200).json({ statusCode: 200, data: randomMessage })
+return res.status(200).json({ statusCode: 200, data: { message: randomMessage } })
 })
 
 app.listen(4000, 'localhost', () => {

@@ -1,10 +1,11 @@
 import { Player } from "@remotion/player"
 import { useForm } from "react-hook-form"
-import PlaceholderPreset from "../components/presets/PlaceholderPreset"
+import PlaceholderPreset from "../components/presets/BasePreset"
 import { nameAtom, promptAtom } from "../components/model/Atoms"
 import { useAtom } from "jotai"
 import { useMutation, useQuery } from "react-query"
 import { fetchPrompt } from "../components/fetch/FetchPrompt"
+import TestPreset from "../components/presets/TestPreset"
 
 interface FormValue {
     name: string
@@ -29,7 +30,7 @@ const GenerateForm = () => {
         <div className="grid place-items-center min-h-screen">
             <div>
                 <Player
-                    component={PlaceholderPreset}
+                    component={TestPreset}
                     durationInFrames={120}
                     compositionHeight={360}
                     compositionWidth={360}

@@ -1,8 +1,8 @@
 import { Composition, continueRender, delayRender } from "remotion";
-import { MyComposition } from "./Composition";
-import "../styles/style.css";
 import { useCallback, useEffect, useState } from "react";
 import { audioBufferToDataUrl } from "@remotion/media-utils";
+import { DefaultPreset } from "../presets/Default";
+import "../styles/style.css";
 
 export const RemotionRoot: React.FC = () => {
   const [audioBuffer, setAudioBuffer] = useState<string | null>(null);
@@ -47,7 +47,7 @@ export const RemotionRoot: React.FC = () => {
       {duration && (
         <Composition
           id="MyComposition"
-          component={MyComposition}
+          component={DefaultPreset}
           // eslint-disable-next-line radix
           durationInFrames={parseInt((duration * 30).toFixed(0)) + 90}
           fps={30}

@@ -1,6 +1,10 @@
+import React from "react";
 import { AbsoluteFill, Audio, Img, Sequence } from "remotion";
 
-export const MyComposition = (props: { audioBuffer: string }) => {
+export const BaseComposition = (props: {
+  audioBuffer: string;
+  children: React.ReactNode;
+}) => {
   return (
     <AbsoluteFill className="items-center justify-center bg-black">
       <Sequence name="Picture" from={10}>
@@ -12,6 +16,7 @@ export const MyComposition = (props: { audioBuffer: string }) => {
       <Sequence name="Audio">
         <Audio src={props.audioBuffer} />
       </Sequence>
+      {props.children}
     </AbsoluteFill>
   );
 };

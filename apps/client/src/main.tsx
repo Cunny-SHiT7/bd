@@ -4,6 +4,7 @@ import App from './pages/App.tsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import VideoPlaceholder from './pages/VideoPlaceholder.tsx'
+import GenerateForm from './pages/GenerateForm.tsx'
 
 const routes = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const routes = createBrowserRouter([
   {
     path: "/videodemo",
     element: <VideoPlaceholder />
+  },
+  {
+    path: "/formdemo",
+    element: <GenerateForm />
   }
 ])
 

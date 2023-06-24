@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai'
-import { AbsoluteFill, Audio, Img, Sequence, staticFile } from 'remotion'
+import { AbsoluteFill, Audio, Img, Sequence, Video, staticFile } from 'remotion'
 import {
   nameAtom,
   promptAtom,
@@ -31,7 +31,7 @@ const BaseComposition: FC<BasePreset> = ({
   const [prompt] = useAtom(promptAtom)
 
   return (
-    <AbsoluteFill className="bg-red-100">
+    <AbsoluteFill className="">
       {backgroundImageURL && (
         <Img
           src={staticFile(backgroundImageURL)}
@@ -47,13 +47,13 @@ const BaseComposition: FC<BasePreset> = ({
             {prompt ? prompt : PlaceholderPrompt}
           </p>
         )}
-        {children}
       </div>
       {audioURL && (
         <Sequence name="Audio" from={1.25 * VIDEO_FRAMES_PER_SECOND}>
           <Audio src={audioURL} />
         </Sequence>
       )}
+      {children}
     </AbsoluteFill>
   )
 }

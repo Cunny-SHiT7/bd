@@ -1,3 +1,4 @@
+import Sakoy1Preset from "./Sakoy1Preset"
 import TestPreset from "./TestPreset"
 
 export const PlaceholderName = 'NAME'
@@ -18,8 +19,13 @@ export const themes: Themes = [
     element: TestPreset,
   },
   {
-    key: "faimly",
+    key: "family",
     display: 'ครอบครัว',
     element: () => <></>,
   },
+  {
+    key: "sakoy1",
+    display: "สก๊อย 1",
+    element: Sakoy1Preset
+  }
 ]

@@ -24,14 +24,16 @@ const GenerateFormInfo = () => {
     const { register, handleSubmit } = useForm<GenerateMessageProps>()
 
     const handleGenerate = async (data: GenerateMessageProps) => {
+        console.log(theme)
         if (!theme?.key) return
         setName(data.name)
         navigate(`/share/${theme?.key}/${data.name}?gender=${data.gender}`)
     }
 
     const handleSelect = () => {
+        console.log(Select?.current?.value)
         if (!Select?.current?.value) return
-        setTheme(themes[Select.current.value])
+        setTheme(themes.find(theme => theme.key === Select.current.value))
     }
 
     return (

@@ -9,16 +9,16 @@ import { FamilyPreset } from './presets/Family'
 import './styles/style.css'
 import { JapanPreset } from './presets/Japan'
 import { SadPreset } from './presets/Sad'
-import { SaiyorPreset } from './presets/Saiyor'
 import { ThammaPreset } from './presets/Thamma'
 import { WeebPreset } from './presets/Weeb'
 import { audioBufferToDataUrl } from '@remotion/media-utils'
+import { Sakoy1Preset, Sakoy2Preset, Sakoy3Preset } from './presets/SaiyorPreset'
 
 export const presets = {
   family: FamilyPreset,
   japan: JapanPreset,
   sad: SadPreset,
-  saiyor: SaiyorPreset,
+  sakoy: [Sakoy1Preset, Sakoy2Preset, Sakoy3Preset],
   thamma: ThammaPreset,
   weeb: WeebPreset,
 }

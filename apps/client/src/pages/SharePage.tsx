@@ -4,16 +4,18 @@ import useAudio from "../components/hooks/useAudio"
 import { themes } from "../components/presets/Preset"
 import { nameAtom, promptAtom, voiceAtom } from "../components/model/UserAtom"
 import { useAtom } from "jotai"
-import { useMutation } from "react-query"
+import { useMutation, useQuery } from "react-query"
 import { getVideoFn } from "../functions/getMessage"
 import { useEffect, useMemo, useState } from "react"
 import { useSearchParams } from "react-router-dom"
+import { getStatusFn } from "../functions/getStatus"
 
 const SharePage = () => {
 
     // VDO URL State
     const [videoURL, setVideoURL] = useState('')
     // Fetch status target
+    const [renderId, setRenderId] = useState('')
 
     const { theme: themeKey, name } = useParams<{
         theme: string,
@@ -21,7 +23,6 @@ const SharePage = () => {
     }>()
 
     const [searchParams] = useSearchParams()
-    const location = useLocation()
 
     const gender = useMemo(() => {
         return searchParams.get("gender") ?? "MALE"
@@ -31,9 +32,13 @@ const SharePage = () => {
         return themes.find(theme => theme.key === themeKey)
     }, [themeKey])
 
+    /**
+     * FETCH FOR VIDEO STATUS UPDATE USING REACT QUERY HERE
+     */
+
     const handleFetch = useMutation('prompt', getVideoFn, {
         onSuccess: data => {
-            setVideoURL(data.url)
+            setRenderId(data.id)
         },
         onError: error => {
             console.error(error)
@@ -51,19 +56,13 @@ const SharePage = () => {
         })
     }, [name, gender])
 
-
-    // const handleCopyLink = () => {
-    //     navigator.clipboard.writeText(location.pathname)
-    //     alert("ก็อบแล้วจ้า")
-    // }
-
     return (
         <div className="w-full min-h-screen flex flex-col gap-y-4 px-8 items-center justify-center">
             <h1 className="text-3xl">
                 มีคนกำลังส่งให้กับคุณ{name}
             </h1>
             {
-                videoURL && <video src={videoURL} />
+                renderId && <h1>Your video is rendering please do not exit this page</h1>
             }
             {/* <button
                 onClick={handleCopyLink} className="border-2 rounded-md ">

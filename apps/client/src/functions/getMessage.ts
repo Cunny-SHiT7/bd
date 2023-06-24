@@ -9,7 +9,12 @@ type GetMessageProps = {
 
 export const getVideoFn = async (values: GetMessageProps) => {
   const { data } = await axios.post<{
-    data: { url: string }
+    data: {
+      // // Video source URL
+      // url: string
+      // ID for fetching rendering status
+      id: string
+    }
   }>('http://localhost:4000/generate', {
     name: values.name,
     gender: values.gender,

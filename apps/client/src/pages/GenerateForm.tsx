@@ -1,10 +1,6 @@
 import { Player } from "@remotion/player"
 import { useForm } from "react-hook-form"
-import PlaceholderPreset from "../components/presets/BasePreset"
-import { nameAtom, promptAtom } from "../components/model/Atoms"
-import { useAtom } from "jotai"
-import { useMutation, useQuery } from "react-query"
-import { fetchPrompt } from "../components/fetch/FetchPrompt"
+import { useMutation } from "react-query"
 import TestPreset from "../components/presets/TestPreset"
 import { getMessageFn } from "../functions/getMessage"
 

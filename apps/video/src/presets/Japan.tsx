@@ -1,7 +1,7 @@
 import { Audio, Sequence, Video, staticFile } from "remotion";
 import { BaseComposition } from "../modules/Composition";
 
-export const DefaultPreset = (props: { audioBuffer: string }) => {
+export const JapanPreset = (props: { audioBuffer: string }) => {
   return (
     <BaseComposition
       audioBuffer={props.audioBuffer}

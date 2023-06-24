@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -104,6 +108,9 @@ importers:
     dependencies:
       '@remotion/cli':
         specifier: 3.3.102
+        version: 3.3.102(react-dom@18.2.0)(react@18.2.0)
+      '@remotion/gif':
+        specifier: ^3.3.102
         version: 3.3.102(react-dom@18.2.0)(react@18.2.0)
       '@remotion/media-utils':
         specifier: ^3.3.102
@@ -1511,6 +1518,17 @@ packages:
       - supports-color
       - typescript
     dev: true
+
+  /@remotion/gif@3.3.102(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-vz2AmHPjjfO+4M2lOMxqmK4Fa+i4fCKHd9pjArMIkEhou1Sqr3aZhkHn29LkkXylR546TrBkCuNVI8zW2SeVvw==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      remotion: 3.3.102(react-dom@18.2.0)(react@18.2.0)
+    dev: false
 
   /@remotion/media-utils@3.3.102(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-mDjGscR+daZEmtGnNC34EFWuRKca0qY4EKkmyAw1nYPwkjDnP6q5xlvq99NEvfnAoOqboAQtycEVaWwrssoXwQ==}
@@ -5589,7 +5607,3 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

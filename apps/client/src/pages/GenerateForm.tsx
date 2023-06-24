@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form"
 import { useMutation } from "react-query"
 import TestPreset from "../components/presets/TestPreset"
 import { getMessageFn } from "../functions/getMessage"
-import { nameAtom, promptAtom } from "../components/model/Atoms"
+import { nameAtom, promptAtom } from "../components/model/UserAtom"
 import { useAtom } from "jotai"
+import { VIDEO_FRAMES_PER_SECOND, videoLengthAtom } from "../components/model/VideoMetaAtom"
 
 interface GenerateMessageProps {
     name: string
@@ -16,6 +17,7 @@ const GenerateForm = () => {
 
     const [, setPrompt] = useAtom(promptAtom)
     const [, setName] = useAtom(nameAtom)
+    const [videoDurationSecond] = useAtom(videoLengthAtom)
 
     const handleGenerate = async (data: GenerateMessageProps) => {
         await handleFetch.mutateAsync({
@@ -38,11 +40,12 @@ const GenerateForm = () => {
         <div className="grid place-items-center min-h-screen">
             <div>
                 <Player
+                    controls
                     component={TestPreset}
-                    durationInFrames={120}
+                    durationInFrames={videoDurationSecond * VIDEO_FRAMES_PER_SECOND}
                     compositionHeight={360}
                     compositionWidth={360}
-                    fps={30}
+                    fps={VIDEO_FRAMES_PER_SECOND}
                 />
             </div>
             <form onSubmit={handleSubmit(handleGenerate)}>

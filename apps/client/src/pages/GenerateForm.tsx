@@ -4,18 +4,18 @@ import PlaceholderPreset from "../components/presets/PlaceholderPreset"
 import { useMutation } from "react-query"
 import { getMessageFn } from "../functions/getMessage"
 
-interface FormValue {
+interface GenerateMessageProps {
     name: string
+    gender: "MALE" | "FEMALE"
 }
 
 const GenerateForm = () => {
-    const { register, handleSubmit } = useForm<FormValue>()
+    const { register, handleSubmit } = useForm<GenerateMessageProps>()
 
-
-    const handleGenerate = async (data: FormValue) => {
+    const handleGenerate = async (data: GenerateMessageProps) => {
         await handleFetch.mutateAsync({
             name: data.name,
-            gender: 'MALE'
+            gender: data.gender
         })
     }
 
@@ -41,7 +41,11 @@ const GenerateForm = () => {
             </div>
             <form onSubmit={handleSubmit(handleGenerate)}>
                 <div className="flex justify-center gap-x-2">
-                    <input {...register('name')} type="text" placeholder="ชื่อของคุณ" className="p-1 border-2 border-black rounded-md"></input>
+                    <input {...register('name')} type="text" placeholder="ชื่อของคุณ" className="p-1 border-2 border-black rounded-md" />
+                    <select {...register('gender')}>
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>    
+                    </select>                    
                     <button className="p-1 border-2 border-gray-600 rounded-md">Submit</button>
                 </div>
             </form>

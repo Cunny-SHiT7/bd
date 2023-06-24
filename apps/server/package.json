@@ -18,7 +18,8 @@
     "express": "4.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "remotion": "3.3.102"
+    "remotion": "3.3.102",
+    "web-audio-api": "^0.2.2"
   },
   "devDependencies": {
     "@types/express": "4.17.17"

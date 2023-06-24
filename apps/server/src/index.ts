@@ -8,6 +8,8 @@ import { birthdayWishes } from './constant'
 import { generateVoice } from './utils'
 
 //
+import axios from 'axios'
+import { audioBufferToDataUrl } from '@remotion/media-utils'
 ;(() => {
   const app = express()
   app.use(
@@ -50,18 +52,36 @@ import { generateVoice } from './utils'
         })
     }
 
+    const { name, gender } = req.body
+
     try {
       if (cache.get(JSON.stringify(req.query))) {
         sendFile(cache.get(JSON.stringify(req.query)) as string)
         return
       }
+      const response = (
+        await axios.post<{
+          data: {
+            voice: string
+            message: string
+          }
+        }>('http://localhost:4000/random', {
+          name,
+          gender,
+        })
+      ).data
+
+      // Parse base64 to ArrayBuffer
+      const arrayBuffer = Uint8Array.from(atob(response.data.voice), c =>
+        c.charCodeAt(0)
+      )
+
       const bundled = await bundle(path.join(__dirname, '../remotion/index.ts'))
       // Extract all the compositions you have defined in your project
       // from the webpack bundle.
       const comps = await getCompositions(bundled, {
         inputProps: {
-          name: req.body.name,
-          gender: req.body.gender,
+          arrayBuffer,
         },
       })
 

@@ -9,11 +9,16 @@
     "start": "vite preview"
   },
   "dependencies": {
+    "@remotion/cli": "3.3.102",
+    "@remotion/player": "^3.3.102",
+    "@remotion/tailwind": "3.3.102",
+    "jotai": "^2.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.0",
     "react-router": "^6.14.0",
-    "react-router-dom": "^6.14.0"
+    "react-router-dom": "^6.14.0",
+    "remotion": "3.3.102"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

@@ -1,7 +1,7 @@
 import { Audio, Sequence, Video, staticFile } from 'remotion'
 import { BaseComposition } from '../Composition'
 
-export const SaiyorPreset = (props: { audioBuffer: string }) => {
+export const WeebPreset = (props: { audioBuffer: string }) => {
   return (
     <BaseComposition
       audioBuffer={props.audioBuffer}

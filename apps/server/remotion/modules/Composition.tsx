@@ -4,10 +4,12 @@ import {
   Audio,
   Img,
   Sequence,
+  Video,
   random,
   staticFile,
 } from 'remotion'
 import { Gif } from '@remotion/gif'
+import { shuffleAndPickOne } from '../libs/stuff'
 
 export const BaseComposition = (props: {
   audioBuffer: string
@@ -29,7 +31,6 @@ export const BaseComposition = (props: {
       <Sequence name="Audio" from={props.voiceDelay}>
         <Audio src={props.audioBuffer} volume={1} />
       </Sequence>
-
       {/* Weird Stuff */}
       {!props.hideOverlay && <BirthdaySprinkle seed={props.randomSeed} />}
     </AbsoluteFill>
@@ -72,6 +73,7 @@ const BirthdaySprinkle = (props: { seed: string }) => {
                 objectFit: 'fill',
                 left: 0,
                 top: 0,
+                zIndex: 10,
               }}
             />
           </div>
@@ -80,3 +82,37 @@ const BirthdaySprinkle = (props: { seed: string }) => {
     </>
   )
 }
+
+export const SimpleBase = (props: {
+  videos: any
+  audios: any
+  randomSeed: string
+}) => (
+  <>
+    <Sequence from={20}>
+      <Video
+        src={staticFile(
+          `/presets/sad/video/${shuffleAndPickOne(
+            props.videos,
+            props.randomSeed + '-video'
+          )}`
+        )}
+        style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          zIndex: 5,
+        }}
+      />
+    </Sequence>
+    <Audio
+      src={staticFile(
+        `/presets/sad/sound/${shuffleAndPickOne(
+          props.audios,
+          props.randomSeed + '-audio'
+        )}`
+      )}
+      volume={0.3}
+    />
+  </>
+)

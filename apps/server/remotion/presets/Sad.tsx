@@ -20,6 +20,7 @@ export const SadPreset = (props: { voiceData: string; randomSeed: string }) => {
       randomSeed={props.randomSeed}
     >
       <SimpleBase
+        prefix="sad"
         videos={Videos}
         audios={Audios}
         randomSeed={props.randomSeed}

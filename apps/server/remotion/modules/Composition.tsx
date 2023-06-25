@@ -84,6 +84,7 @@ const BirthdaySprinkle = (props: { seed: string }) => {
 }
 
 export const SimpleBase = (props: {
+  prefix: string
   videos: any
   audios: any
   randomSeed: string
@@ -92,7 +93,7 @@ export const SimpleBase = (props: {
     <Sequence from={20}>
       <Video
         src={staticFile(
-          `/presets/sad/video/${shuffleAndPickOne(
+          `/presets/${props.prefix}/video/${shuffleAndPickOne(
             props.videos,
             props.randomSeed + '-video'
           )}`
@@ -107,7 +108,7 @@ export const SimpleBase = (props: {
     </Sequence>
     <Audio
       src={staticFile(
-        `/presets/sad/sound/${shuffleAndPickOne(
+        `/presets/${props.prefix}/sound/${shuffleAndPickOne(
           props.audios,
           props.randomSeed + '-audio'
         )}`

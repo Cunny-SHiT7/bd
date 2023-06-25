@@ -1,6 +1,4 @@
-import { Audio, Sequence, Video, staticFile } from 'remotion'
-import { BaseComposition, RandomNoise } from '../modules/Composition'
-import { shuffleAndPickOne } from '../libs/stuff'
+import { BaseComposition, SimpleBase } from '../modules/Composition'
 
 export const WeebPreset = (props: {
   voiceData: string
@@ -24,30 +22,11 @@ export const WeebPreset = (props: {
       pictureDelay={20}
       randomSeed={props.randomSeed}
     >
-      <Sequence from={20} className="z-10 scale-[2] tranform">
-        <Video
-          muted
-          src={staticFile(
-            `/presets/weeb_kawaii/video/${shuffleAndPickOne(
-              Videos,
-              props.randomSeed + '-video'
-            )}`
-          )}
-          className="z-10 w-full opacity-30"
-        />
-      </Sequence>
-      <Audio
-        src={staticFile(
-          `/presets/weeb_kawaii/sound/${shuffleAndPickOne(
-            Audios,
-            props.randomSeed + '-audio'
-          )}`
-        )}
-        volume={0.4}
-      />
-      <RandomNoise
-        seed={props.randomSeed}
-        durationLength={props.voiceDuration}
+      <SimpleBase
+        prefix="weeb_kawaii"
+        videos={Videos}
+        audios={Audios}
+        randomSeed={props.randomSeed}
       />
     </BaseComposition>
   )

@@ -1,5 +1,6 @@
 export const themes = [
   'family',
   'sakoy',
-  'minimal'
+  'minimal',
+  'weeb
 ]

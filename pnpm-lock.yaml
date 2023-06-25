@@ -75,6 +75,9 @@ importers:
         specifier: 3.3.102
         version: 3.3.102(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
+      '@types/await-timeout':
+        specifier: ^0.3.1
+        version: 0.3.1
       '@types/react':
         specifier: ^18.0.37
         version: 18.2.14
@@ -1550,6 +1553,10 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
+
+  /@types/await-timeout@0.3.1:
+    resolution: {integrity: sha512-H5PzROT4KuP7XQDua13Iw8did//OCKAZ/3TL15DjvMzDonrk4HvhH1+tLko96f2guU6XaD3AoqRa49ZOwbwNig==}
+    dev: true
 
   /@types/body-parser@1.19.2:
     resolution: {integrity: sha512-ALYone6pm6QmwZoAgeyNksccT9Q4AWZQ6PvfwR37GT6r6FWUPguq6sUmNGSMV2Wr761oQoBxwGGa6DR5o1DC9g==}

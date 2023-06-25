@@ -54,7 +54,9 @@ import { createRender, getRender, updateRender } from './db'
         randomSeed: renderId,
         theme: req.body.theme,
       }
-      const bundled = await bundle(path.join(__dirname, '../remotion/index.ts'))
+      const bundled = await bundle(path.join(__dirname, '../remotion/index.ts'), () => { return }, {
+        outDir: path.join(__dirname, '../out'),
+      })
       console.log('FILE BUNDLED')
       // Extract all the compositions you have defined in your project
       // from the webpack bundle.

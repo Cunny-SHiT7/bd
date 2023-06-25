@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { bundle } from '@remotion/bundler'
 import { getCompositions, renderMedia } from '@remotion/renderer'
-import express from 'express'
+import express, { Request, Response } from 'express'
 import { birthdayWishes } from './constant'
 import { generateVoice, uploadToMirai } from './utils'
 import axios from 'axios'
@@ -10,15 +10,26 @@ import { createRender, getRender, updateRender } from './db'
 // @ts-ignore
 import queue from 'express-queue'
 
-(() => {
+;(() => {
   const app = express()
-  const queueMw = queue({ activeLimit: 10, queuedLimit: 10, rejectHandler: (req, res) => { res.status(500).json({ statusCode: 500, message: 'Current queue is full, please try again' }); } });
+  const queueMw = queue({
+    activeLimit: 10,
+    queuedLimit: 10,
+    rejectHandler: (_req: Request, res: Response) => {
+      res
+        .status(500)
+        .json({
+          statusCode: 500,
+          message: 'Current queue is full, please try again',
+        })
+    },
+  })
   app.use(
     express.json({
       limit: '50mb',
     })
   )
-  app.use(queueMw);
+  app.use(queueMw)
 
   const compositionId = 'MyComposition'
 
@@ -66,7 +77,7 @@ import queue from 'express-queue'
       // Extract all the compositions you have defined in your project
       // from the webpack bundle.
       const comps = await getCompositions(bundled, {
-        inputProps
+        inputProps,
       })
       // Select the composition you want to render.
       const composition = comps.find(c => c.id === compositionId)
@@ -77,7 +88,7 @@ import queue from 'express-queue'
 
       const renderId = await createRender(req.body)
       const outputLocation = `out/${compositionId}.mp4`
-      new Promise(async (resolve) => {
+      new Promise(async resolve => {
         try {
           await renderMedia({
             composition,
@@ -85,7 +96,7 @@ import queue from 'express-queue'
             codec: 'h264',
             outputLocation,
             inputProps,
-            onProgress: async (p) => {
+            onProgress: async p => {
               await updateRender(renderId, {
                 process: p.progress * 100,
                 url: null,
@@ -106,8 +117,7 @@ import queue from 'express-queue'
             process: 100,
             isError: true,
           })
-        }
-        finally {
+        } finally {
           resolve(null)
         }
       })

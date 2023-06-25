@@ -51,11 +51,15 @@ export const updateRender = async (id: string, payload: {
 }
 
 export const getRender = async (id: string) => {
-  const render = await db.getData(`/render/${id}`)
-  if (!render) {
+  try {
+    const render = await db.getData(`/render/${id}`)
+    if (!render) {
+      return null
+    }
+    return render
+  } catch {
     return null
   }
-  return render
 }
 
 export default db

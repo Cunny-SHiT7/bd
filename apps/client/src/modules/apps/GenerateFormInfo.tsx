@@ -3,7 +3,6 @@ import { themes } from '../../libs/config'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import { useNavigate } from 'react-router'
-import { env } from 'process'
 
 interface GenerateMessageProps {
   name: string
@@ -17,7 +16,7 @@ const GenerateFormInfo = () => {
 
   const mutation = useMutation({
     mutationFn: values => {
-      return axios.post(`abc.cunny.dev/createRender`, values)
+      return axios.post(`https://abc.cunny.dev/createRender`, values)
     },
   })
 

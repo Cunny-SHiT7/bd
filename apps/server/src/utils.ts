@@ -1,18 +1,29 @@
 import axios from 'axios'
+import FormData from 'form-data'
+import { ReadStream } from 'fs'
 
-export const uploadToMirai = async (file: File) => {
-  const formData = new FormData()
-  formData.append('file', file)
-  formData.append('uploadType', '0')
-  const { data } = await axios.post("https://up.m1r.ai/upload", formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  })
-  if (!data.success || !data.data.url) {
-    throw new Error('Failed to upload to Mirai: ' + data.message)
+export const uploadToMirai = async (file: ReadStream) => {
+  try {
+    const netImageFormData = new FormData()
+    netImageFormData.append('file', file)
+    netImageFormData.append('uploadType', '0')
+    const { data } = await axios.post(
+      'https://up.m1r.ai/upload',
+      netImageFormData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
+    if (!data.url) {
+      throw new Error('Failed to upload to Mirai: ' + data.message)
+    }
+    return data.url as string
+  } catch (e: any) {
+    console.log(e)
+    throw new Error('Failed to upload to Mirai: ' + e.message)
   }
-  return data
 }
 
 export const generateVoice = async (

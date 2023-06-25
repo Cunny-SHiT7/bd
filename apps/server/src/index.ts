@@ -3,12 +3,10 @@ import path from 'path'
 import { bundle } from '@remotion/bundler'
 import { getCompositions, renderMedia } from '@remotion/renderer'
 import express from 'express'
-
 import { birthdayWishes } from './constant'
-import { generateVoice } from './utils'
-
+import { generateVoice, uploadToMirai } from './utils'
 import axios from 'axios'
-
+import { createRender, getRender, updateRender } from './db'
 
 (() => {
   const app = express()
@@ -42,17 +40,8 @@ import axios from 'axios'
       name: string
       gender: 'MALE' | 'FEMALE'
     }
-  >('/generate', async (req, res) => {
-    const sendFile = (file: string) => {
-      fs.createReadStream(file)
-        .pipe(res)
-        .on('close', () => {
-          res.end()
-        })
-    }
-
+  >('/createRender', async (req, res) => {
     const { name, gender } = req.body
-
     try {
       const response = (
         await axios.post<{
@@ -69,34 +58,58 @@ import axios from 'axios'
         voice: response.data.voice,
         message: response.data.message,
       }
-
       const bundled = await bundle(path.join(__dirname, '../remotion/index.ts'))
       // Extract all the compositions you have defined in your project
       // from the webpack bundle.
       const comps = await getCompositions(bundled, {
         inputProps
       })
-
       // Select the composition you want to render.
       const composition = comps.find(c => c.id === compositionId)
-
       // Ensure the composition exists
       if (!composition) {
         throw new Error(`No composition with the ID ${compositionId} found`)
       }
 
+      const renderId = await createRender(req.body)
       const outputLocation = `out/${compositionId}.mp4`
-      await renderMedia({
-        composition,
-        serveUrl: bundled,
-        codec: 'h264',
-        outputLocation,
-        inputProps
+      new Promise(async (resolve) => {
+        try {
+          await renderMedia({
+            composition,
+            serveUrl: bundled,
+            codec: 'h264',
+            outputLocation,
+            inputProps,
+            onProgress: async (p) => {
+              await updateRender(renderId, {
+                process: p.progress * 100,
+                url: null,
+              })
+              console.log(`Progress: ${p.progress * 100}%`)
+            },
+          })
+          const readStream = fs.createReadStream(outputLocation)
+          const url = await uploadToMirai(readStream)
+          await updateRender(renderId, {
+            process: 100,
+            url,
+          })
+          console.log(await getRender(renderId))
+        } catch (err) {
+          console.error(err)
+          await updateRender(renderId, {
+            process: 100,
+            isError: true,
+          })
+        }
+        finally {
+          resolve(null)
+        }
       })
-
-
-
-      sendFile(outputLocation)
+      res.json({
+        id: renderId,
+      })
     } catch (err) {
       console.error(err)
       res.json({
@@ -105,12 +118,15 @@ import axios from 'axios'
     }
   })
 
+  app.get('/getRender/:id', async (req, res) => {
+    const renderId = req.params.id
+    const render = await getRender(renderId)
+    res.json(render)
+  })
+
   app.post('/random', async (req, res) => {
     const name = req.body?.name
     const gender = req.body?.gender
-
-    console.log('random router')
-    console.log(req.body)
 
     if (!name) {
       return res

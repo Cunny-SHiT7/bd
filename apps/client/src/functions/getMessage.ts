@@ -15,7 +15,7 @@ export const getVideoFn = async (values: GetMessageProps) => {
     name: values.name,
     gender: values.gender,
     theme: values.theme,
-  })
+  }, { timeout: 1000000 })
 
   return data.data
 }

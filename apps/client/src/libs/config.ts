@@ -1,4 +1,1 @@
-export const themes = [
-  'family',
-  'sakoy'
-]
+export const themes = ['family', 'sakoy', 'weeb']

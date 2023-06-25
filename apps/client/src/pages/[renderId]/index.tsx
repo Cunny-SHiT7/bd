@@ -12,12 +12,15 @@ const RenderInformationPage = () => {
   })
 
   if (data.isLoading) return <div>Loading...</div>
+
+  // Loading progress
   if (!data.data?.data.url)
     return (
       <>
         {!data.data?.data.isError ? (
           <>
             <div>
+              <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmE2MTNsNHM2MG51bDE0aGIzMHZ5dzdhbmtram9oMTJmYjZ0ZjV4bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7bu3XilJ5BOiSGic/giphy.gif" />
               กำลังทำวิดีโอให้ไอ่ควาย
               <p>{data.data?.data.process * 100}%</p>
             </div>

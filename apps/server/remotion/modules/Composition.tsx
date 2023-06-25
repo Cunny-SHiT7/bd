@@ -93,6 +93,7 @@ export const SimpleBase = (props: {
   <>
     <Sequence from={20}>
       <Video
+        muted
         src={staticFile(
           `/presets/${props.prefix}/video/${shuffleAndPickOne(
             props.videos,
@@ -115,7 +116,7 @@ export const SimpleBase = (props: {
           props.randomSeed + '-audio'
         )}`
       )}
-      volume={0.3}
+      volume={0.2}
     />
   </>
 )

@@ -7,14 +7,18 @@ import { birthdayWishes } from './constant'
 import { generateVoice, uploadToMirai } from './utils'
 import axios from 'axios'
 import { createRender, getRender, updateRender } from './db'
+// @ts-ignore
+import queue from 'express-queue'
 
 (() => {
   const app = express()
+  const queueMw = queue({ activeLimit: 10, queuedLimit: 10, rejectHandler: (req, res) => { res.status(500).json({ statusCode: 500, message: 'Current queue is full, please try again' }); } });
   app.use(
     express.json({
       limit: '50mb',
     })
   )
+  app.use(queueMw);
 
   const compositionId = 'MyComposition'
 

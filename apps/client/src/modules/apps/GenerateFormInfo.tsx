@@ -27,7 +27,7 @@ const GenerateFormInfo = () => {
 
   return (
     <form onSubmit={handleSubmit(createRender)}>
-      <div className="flex flex-col justify-center gap-y-2">
+      <div className=" justify-center gap-y-2">
         <div>
           <h1>เลือกธีมของท่าน</h1>
           <select
@@ -61,7 +61,7 @@ const GenerateFormInfo = () => {
           <option value="MALE">เสียงบรรยายผู้ชาย</option>
           <option value="FEMALE">เสียงบรรยายผู้หญิง</option>
         </select>
-        <button disabled={mutation.isLoading}>
+        <button className="border-2 border-black " disabled={mutation.isLoading}>
           {mutation.isLoading ? 'กำลังสร้าง' : 'สร้าง'}
         </button>
       </div>

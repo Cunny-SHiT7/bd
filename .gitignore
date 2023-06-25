@@ -35,4 +35,4 @@ yarn-error.log*
 .turbo
 
 # low db
-renders.json
+/apps/server/renders.json

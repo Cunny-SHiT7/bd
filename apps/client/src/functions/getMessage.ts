@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { env } from 'process'
 
 type GetMessageProps = {
   name: string
@@ -11,7 +12,7 @@ export const getVideoFn = async (values: GetMessageProps) => {
     data: {
       id: string
     }
-  }>('http://localhost:4000/generate', {
+  }>(`abc.cunny.dev/generate`, {
     name: values.name,
     gender: values.gender,
     theme: values.theme,

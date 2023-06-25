@@ -68,9 +68,9 @@ export const RemotionRoot: React.FC = () => {
           durationInFrames={
             parseInt((audioData.voiceDuration * 30).toFixed(0)) + 90
           }
-          fps={30}
-          width={360}
-          height={360}
+          fps={25}
+          width={320}
+          height={320}
           defaultProps={{
             voiceData: audioData.voiceData,
             voiceDuration: audioData.voiceDuration,

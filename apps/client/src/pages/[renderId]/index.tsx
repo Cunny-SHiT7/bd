@@ -18,7 +18,7 @@ const RenderInformationPage = () => {
         {!data.data?.data.isError ? (
           <>
             <div>
-              กำลังทำวิดีโอให้ไอ่ควาย
+              กำลังทำวิดีโอให้ แปปนึง
               <p>{data.data?.data.process * 100}%</p>
             </div>
           </>

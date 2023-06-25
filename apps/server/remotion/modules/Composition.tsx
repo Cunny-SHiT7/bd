@@ -40,7 +40,7 @@ export const RandomNoise = (props: {
   seed: string
   durationLength: number
 }) => {
-  const randomCoordinates = new Array(40).fill(true).map((a, i) => {
+  const randomCoordinates = new Array(40).fill(true).map((_, i) => {
     return +(random(`random-x-${i}`) * props.durationLength * 100).toFixed(0)
   })
 

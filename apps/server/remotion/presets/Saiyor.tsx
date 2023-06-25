@@ -1,7 +1,8 @@
-import { Audio, Sequence, Video, random, staticFile } from 'remotion'
+import { Audio, Sequence, Video, staticFile } from 'remotion'
 import { BaseComposition } from '../modules/Composition'
+import { shuffleAndPickOne } from '../libs/stuff'
 
-const sounds = [
+const Audios = [
   'Astronomia-Rodhae.opus',
   'Bruh-Rodhae.opus',
   'ConanE3.opus',
@@ -10,6 +11,21 @@ const sounds = [
   'saiyor.mp3',
   'UnwelcomeSchoolE3.opus',
   'YangDumb.opus',
+]
+
+const Videos = [
+  'dancing1.webm',
+  'dancing2.webm',
+  'dancing3.webm',
+  'dancing4.webm',
+  'dancing5.webm',
+  'dancing6.webm',
+  'dancing7.webm',
+  'dancing8.webm',
+  'Funeral0.webm',
+  'Funeral1.webm',
+  'Racing0.webm',
+  'Racing1.webm',
 ]
 
 export const SakoyPreset = (props: {
@@ -26,15 +42,21 @@ export const SakoyPreset = (props: {
       <Sequence from={20} className="z-10 scale-[2] tranform">
         <Video
           volume={0.075}
-          src={staticFile('presets/sakoy/video/Funeral1.webm')}
+          src={staticFile(
+            `/presets/sakoy/video/${shuffleAndPickOne(
+              Videos,
+              props.randomSeed + '-video'
+            )}}`
+          )}
           className="z-10 w-full opacity-30"
         />
       </Sequence>
       <Audio
         src={staticFile(
-          `/presets/sakoy/sound/${
-            sounds[Math.floor(random(props.randomSeed) * sounds.length)]
-          }`
+          `/presets/sakoy/sound/${shuffleAndPickOne(
+            Audios,
+            props.randomSeed + '-audio'
+          )}`
         )}
         volume={0.3}
       />

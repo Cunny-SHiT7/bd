@@ -14,6 +14,7 @@
     "@remotion/player": "^3.3.102",
     "@remotion/tailwind": "3.3.102",
     "@tanstack/react-query": "^4.29.15",
+    "await-timeout": "^1.1.1",
     "axios": "^1.4.0",
     "jotai": "^2.2.1",
     "react": "^18.2.0",

@@ -1,6 +1,5 @@
 import fs from 'fs'
 import path from 'path'
-import { bundle } from '@remotion/bundler'
 import { getCompositions, renderMedia } from '@remotion/renderer'
 import express from 'express'
 import { birthdayWishes } from './constant'

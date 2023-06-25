@@ -2,34 +2,23 @@ import fs from 'fs'
 import path from 'path'
 import { bundle } from '@remotion/bundler'
 import { getCompositions, renderMedia } from '@remotion/renderer'
-import express, { Request, Response } from 'express'
+import express from 'express'
 import { birthdayWishes } from './constant'
 import { generateVoice, uploadToMirai } from './utils'
 import axios from 'axios'
+import { Mutex } from 'async-mutex'
 import { createRender, getRender, updateRender } from './db'
 // @ts-ignore
 import queue from 'express-queue'
 
 ;(() => {
   const app = express()
-  const queueMw = queue({
-    activeLimit: 10,
-    queuedLimit: 10,
-    rejectHandler: (_req: Request, res: Response) => {
-      res
-        .status(500)
-        .json({
-          statusCode: 500,
-          message: 'Current queue is full, please try again',
-        })
-    },
-  })
+  const mutex = new Mutex()
   app.use(
     express.json({
       limit: '50mb',
     })
   )
-  app.use(queueMw)
 
   const compositionId = 'MyComposition'
 
@@ -58,6 +47,7 @@ import queue from 'express-queue'
     }
   >('/createRender', async (req, res) => {
     const { name, gender } = req.body
+    const release = await mutex.acquire()
     try {
       const response = (
         await axios.post<{
@@ -133,6 +123,9 @@ import queue from 'express-queue'
       res.json({
         error: err,
       })
+      release()
+    } finally {
+      release()
     }
   })
 

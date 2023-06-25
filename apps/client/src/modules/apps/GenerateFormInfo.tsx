@@ -61,7 +61,9 @@ const GenerateFormInfo = () => {
           <option value="MALE">เสียงบรรยายผู้ชาย</option>
           <option value="FEMALE">เสียงบรรยายผู้หญิง</option>
         </select>
-        <button>สร้าง</button>
+        <button disabled={mutation.isLoading}>
+          {mutation.isLoading ? 'กำลังสร้าง' : 'สร้าง'}
+        </button>
       </div>
     </form>
   )

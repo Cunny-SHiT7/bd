@@ -24,7 +24,7 @@ const GenerateFormInfo = () => {
 
   const createRender = async (values: any) => {
     console.log(values)
-    const data = await mutation.mutateAsync(values)
+    const data = await Timeout.wrap(mutation.mutateAsync(values), 990000000, 'Mutation timeout!');
     console.log(data)
     navigate(`/${data.data.id}`)
   }

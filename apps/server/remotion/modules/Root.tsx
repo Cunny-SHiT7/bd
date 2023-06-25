@@ -18,8 +18,8 @@ import '../styles/style.css'
 export const presets = {
   family: FamilyPreset, // finished
   japan: JapanPreset,
-  sad: SadPreset,
-  sakoy: SakoyPreset, // waiting source
+  sad: SadPreset, // waiting source
+  sakoi: SakoyPreset, // waiting source
   thamma: ThammaPreset,
   weeb: WeebPreset, // waiting source
   minimal: MinimalPreset,
@@ -47,11 +47,15 @@ export const RemotionRoot: React.FC = () => {
     const audioBuffer = await new AudioContext().decodeAudioData(
       arrayBuffer.buffer
     )
+    const voiceData = audioBufferToDataUrl(audioBuffer)
+
     setAudioData({
-      voiceData: audioBufferToDataUrl(audioBuffer),
+      voiceData: voiceData,
       voiceDuration: audioBuffer.duration,
     })
+
     continueRender(handle)
+    console.log('fetched')
   }, [])
 
   useEffect(() => {

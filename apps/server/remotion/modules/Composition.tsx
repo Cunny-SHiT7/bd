@@ -29,7 +29,6 @@ export const BaseComposition = (props: {
       <Sequence name="Audio" from={props.voiceDelay}>
         <Audio src={props.audioBuffer} volume={1} />
       </Sequence>
-
       {/* Weird Stuff */}
       {!props.hideOverlay && <BirthdaySprinkle seed={props.randomSeed} />}
     </AbsoluteFill>
@@ -72,6 +71,7 @@ const BirthdaySprinkle = (props: { seed: string }) => {
                 objectFit: 'fill',
                 left: 0,
                 top: 0,
+                zIndex: 10,
               }}
             />
           </div>

@@ -53,7 +53,7 @@ export const updateRender = async (id: string, payload: {
 export const getRender = async (id: string) => {
   const render = await db.getData(`/render/${id}`)
   if (!render) {
-    throw new Error(`No render with the ID ${id} found`)
+    return null
   }
   return render
 }

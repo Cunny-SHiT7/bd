@@ -1,4 +1,9 @@
-import { Composition, continueRender, delayRender } from 'remotion'
+import {
+  Composition,
+  continueRender,
+  delayRender,
+  getInputProps,
+} from 'remotion'
 import { useCallback, useEffect, useState } from 'react'
 import { FamilyPreset } from './presets/Family'
 import { JapanPreset } from './presets/Japan'
@@ -16,15 +21,14 @@ export const presets = {
   sad: SadPreset,
   sakoy: SakoyPreset, // waiting source
   thamma: ThammaPreset,
-  weeb: WeebPreset,
+  weeb: WeebPreset, // waiting source
 }
 
-// const { voice } = getInputProps() as {
-//   message: string
-//   voice: string
-// }
-
-const voice = data.data.voice
+const { voice } = getInputProps() as {
+  message: string
+  voice: string
+}
+// const voice = data.data.voice
 
 export const RemotionRoot: React.FC = () => {
   const [handle] = useState(() => delayRender())
@@ -54,10 +58,9 @@ export const RemotionRoot: React.FC = () => {
       {audioData && (
         <Composition
           id="MyComposition"
-          component={presets['sakoy']}
+          component={presets['weeb']}
           durationInFrames={
-            // parseInt((audioData.voiceDuration * 30).toFixed(0)) + 90,
-            120
+            parseInt((audioData.voiceDuration * 30).toFixed(0)) + 90
           }
           fps={30}
           width={360}

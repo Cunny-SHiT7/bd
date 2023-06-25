@@ -53,7 +53,7 @@ import { createRender, getRender, updateRender } from './db'
         }>(`https://abc.cunny.dev/random`, {
           name,
           gender,
-        })
+        }, { timeout: 1000000000000 })
       ).data
       const renderId = await createRender(req.body)
 

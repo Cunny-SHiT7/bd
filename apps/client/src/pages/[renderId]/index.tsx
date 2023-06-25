@@ -2,7 +2,6 @@ import { useParams } from 'react-router'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { env } from 'process'
 
 const RenderInformationPage = () => {
 

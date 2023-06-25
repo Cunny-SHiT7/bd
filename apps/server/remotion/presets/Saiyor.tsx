@@ -1,5 +1,5 @@
 import { Audio, Sequence, Video, staticFile } from 'remotion'
-import { BaseComposition } from '../modules/Composition'
+import { BaseComposition, SimpleBase } from '../modules/Composition'
 import { shuffleAndPickOne } from '../libs/stuff'
 
 export const SakoyPreset = (props: {
@@ -35,25 +35,11 @@ export const SakoyPreset = (props: {
       pictureDelay={20}
       randomSeed={props.randomSeed}
     >
-      <Sequence from={20} className="z-10 scale-[2] tranform">
-        <Video
-          src={staticFile(
-            `/presets/sakoy/video/${shuffleAndPickOne(
-              Videos,
-              props.randomSeed + '-video'
-            )}`
-          )}
-          className="absolute w-full h-full"
-        />
-      </Sequence>
-      <Audio
-        src={staticFile(
-          `/presets/sakoy/sound/${shuffleAndPickOne(
-            Audios,
-            props.randomSeed + '-audio'
-          )}`
-        )}
-        volume={0.3}
+      <SimpleBase
+        prefix="sakoy"
+        audios={Audios}
+        videos={Videos}
+        randomSeed={props.randomSeed}
       />
     </BaseComposition>
   )

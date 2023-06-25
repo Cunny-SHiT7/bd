@@ -20,9 +20,9 @@ export const MlgPreset = (props: {
     '10.webm',
   ]
   const Audios = ['1.mp3', '2.mp3', '3.mp3', '4.mp3']
-  const Effects = ['1.mp3', '2.mp3', '3.mp3', '4.mp3', '5.mp3']
+  const Effects = ['1.mp3', '2.mp3', '3.mp3', '4.mp3', '5.mp3', '6.mp3']
 
-  const randomFrom = new Array(10).fill(true).map((_, i) => {
+  const randomFrom = new Array(7).fill(true).map((_, i) => {
     return +(random(`random-x-${i}`) * props.voiceDuration * 100).toFixed(0)
   })
 
@@ -42,6 +42,7 @@ export const MlgPreset = (props: {
       {randomFrom.map(_ => (
         <Sequence from={_}>
           <Audio
+            volume={0.6}
             src={staticFile(
               `/presets/mlg/effect/${shuffleAndPickOne(Effects, `${_}`)}`
             )}

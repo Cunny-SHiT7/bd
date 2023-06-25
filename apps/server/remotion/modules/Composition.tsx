@@ -40,16 +40,17 @@ export const BaseComposition = (props: {
 export const RandomNoise = (props: {
   seed: string
   durationLength: number
+  prefix: string
+  audios: string[]
 }) => {
-  const randomCoordinates = new Array(40).fill(true).map((_, i) => {
+  const randomFrom = new Array(50).fill(true).map((_, i) => {
     return +(random(`random-x-${i}`) * props.durationLength * 100).toFixed(0)
   })
-
   return (
     <>
-      {randomCoordinates.map(_ => (
+      {randomFrom.map((_, i) => (
         <Sequence from={_}>
-          <Audio src={staticFile('boom.mp3')} />
+          <Audio src={staticFile(`/presets/${props.prefix}/effect/.mp3`)} />
         </Sequence>
       ))}
     </>

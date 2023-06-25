@@ -5,5 +5,6 @@ export const themes = [
   'weeb',
   'weeb_butiwanttoaccsao',
   'sad',
-  'thamma'
+  'thamma',
+  'mlg'
 ]

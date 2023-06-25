@@ -14,6 +14,7 @@ import { SakoyPreset } from '../presets/Saiyor'
 import { MinimalPreset } from '../presets/Minimal'
 import '../styles/style.css'
 import { WeebAccSao } from '../presets/WeebAccSao'
+import { MlgPreset } from '../presets/Mlg'
 
 export const presets = {
   family: FamilyPreset, // finished
@@ -23,6 +24,7 @@ export const presets = {
   weeb: WeebPreset, // finished
   minimal: MinimalPreset, // finished
   weeb_butiwanttoaccsao: WeebAccSao, // finished
+  mlg: MlgPreset, // finished
 }
 
 const { voice, randomSeed, theme } = getInputProps() as {

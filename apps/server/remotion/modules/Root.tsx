@@ -13,14 +13,16 @@ import { audioBufferToDataUrl } from '@remotion/media-utils'
 import { SakoyPreset } from '../presets/Saiyor'
 import { MinimalPreset } from '../presets/Minimal'
 import '../styles/style.css'
+import { WeebAccSao } from '../presets/WeebAccSao'
 
 export const presets = {
   family: FamilyPreset, // finished
   sad: SadPreset, // finished
   sakoi: SakoyPreset, // finished
-  thamma: ThammaPreset,
+  thamma: ThammaPreset, // finished
   weeb: WeebPreset, // finished
   minimal: MinimalPreset, // finished
+  weeb_butiwanttoaccsao: WeebAccSao, // finished
 }
 
 const { voice, randomSeed, theme } = getInputProps() as {

@@ -3,6 +3,7 @@ export const themes = [
   'sakoi',
   'minimal',
   'weeb',
+  'weeb_butiwanttoaccsao',
   'sad',
   'thamma'
 ]

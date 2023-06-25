@@ -16,7 +16,7 @@ const GenerateFormInfo = () => {
 
   const mutation = useMutation({
     mutationFn: values => {
-      return axios.post(`https://abc.cunny.dev/createRender`, values, { timeout: 1000000000000 })
+      return axios.post(`https://abc.cunny.dev/createRender`, values, { timeout: 600000 })
     },
   })
 

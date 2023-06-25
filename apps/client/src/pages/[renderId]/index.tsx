@@ -12,7 +12,7 @@ const RenderInformationPage = () => {
   const data = useQuery({
     queryKey: ['render', params.renderId],
     queryFn: async () =>
-      await axios.get(`abc.cunny.dev/getRender/${params.renderId}`),
+      await axios.get(`https://abc.cunny.dev/getRender/${params.renderId}`),
     refetchInterval: 1000,
     enabled: !stopFetching
   })

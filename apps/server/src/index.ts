@@ -50,7 +50,7 @@ import { createRender, getRender, updateRender } from './db'
             voice: string
             message: string
           }
-        }>(`abc.cunny.dev/random`, {
+        }>(`https://abc.cunny.dev/random`, {
           name,
           gender,
         })
@@ -168,7 +168,7 @@ import { createRender, getRender, updateRender } from './db'
       .json({ statusCode: 200, data: { message: randomMessage, voice } })
   })
 
-  app.listen(4000, 'localhost', () => {
+  app.listen(4000, '0.0.0.0', () => {
     console.log('Server running at port 4000')
   })
 })()

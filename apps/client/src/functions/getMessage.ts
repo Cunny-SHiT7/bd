@@ -12,7 +12,7 @@ export const getVideoFn = async (values: GetMessageProps) => {
     data: {
       id: string
     }
-  }>(`abc.cunny.dev/generate`, {
+  }>(`https://abc.cunny.dev/generate`, {
     name: values.name,
     gender: values.gender,
     theme: values.theme,

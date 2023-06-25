@@ -43,9 +43,9 @@ const GenerateFormInfo = () => {
               เลือกธีม
             </option>
             {themes.map(theme => (
-              <option key={theme} value={theme}>
-                {theme}
-              </option>
+              <option key={theme} value={theme} disabled={theme.includes("DANGER")}>
+              {theme}
+            </option>
             ))}
           </select>
         </div>

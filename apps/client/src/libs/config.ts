@@ -6,5 +6,7 @@ export const themes = [
   'weeb_butiwanttoaccsao',
   'sad',
   'thamma',
-  'mlg'
+  'mlg',
+  'rimsa (DANGER)',
+  'hentai (DANGER)'
 ]

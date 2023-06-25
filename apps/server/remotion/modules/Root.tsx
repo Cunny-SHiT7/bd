@@ -6,7 +6,6 @@ import {
 } from 'remotion'
 import { useCallback, useEffect, useState } from 'react'
 import { FamilyPreset } from '../presets/Family'
-import { JapanPreset } from '../presets/Japan'
 import { SadPreset } from '../presets/Sad'
 import { ThammaPreset } from '../presets/Thamma'
 import { WeebPreset } from '../presets/Weeb'
@@ -17,12 +16,11 @@ import '../styles/style.css'
 
 export const presets = {
   family: FamilyPreset, // finished
-  japan: JapanPreset,
-  sad: SadPreset, // waiting source
-  sakoi: SakoyPreset, // waiting source
+  sad: SadPreset, // finished
+  sakoi: SakoyPreset, // finished
   thamma: ThammaPreset,
-  weeb: WeebPreset, // waiting source
-  minimal: MinimalPreset,
+  weeb: WeebPreset, // finished
+  minimal: MinimalPreset, // finished
 }
 
 const { voice, randomSeed, theme } = getInputProps() as {

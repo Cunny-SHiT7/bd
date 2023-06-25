@@ -1,6 +1,4 @@
-import { Audio, Sequence, Video, staticFile } from 'remotion'
-import { BaseComposition } from '../modules/Composition'
-import { shuffleAndPickOne } from '../libs/stuff'
+import { BaseComposition, SimpleBase } from '../modules/Composition'
 
 export const SadPreset = (props: { voiceData: string; randomSeed: string }) => {
   const Videos = [
@@ -21,30 +19,10 @@ export const SadPreset = (props: { voiceData: string; randomSeed: string }) => {
       pictureDelay={20}
       randomSeed={props.randomSeed}
     >
-      <Sequence from={20}>
-        <Video
-          src={staticFile(
-            `/presets/sad/video/${shuffleAndPickOne(
-              Videos,
-              props.randomSeed + '-video'
-            )}`
-          )}
-          style={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            zIndex: 5,
-          }}
-        />
-      </Sequence>
-      <Audio
-        src={staticFile(
-          `/presets/sad/sound/${shuffleAndPickOne(
-            Audios,
-            props.randomSeed + '-audio'
-          )}`
-        )}
-        volume={0.3}
+      <SimpleBase
+        videos={Videos}
+        audios={Audios}
+        randomSeed={props.randomSeed}
       />
     </BaseComposition>
   )

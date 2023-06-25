@@ -3,6 +3,7 @@ import { themes } from '../../libs/config'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import { useNavigate } from 'react-router'
+import Timeout from 'await-timeout';
 
 interface GenerateMessageProps {
   name: string
@@ -16,8 +17,8 @@ const GenerateFormInfo = () => {
 
   const mutation = useMutation({
     mutationFn:async values => {
-      const promise = await axios.post(`https://abc.cunny.dev/createRender`, values, { timeout: 600000 })
-      return promise
+      const promise = await axios.post(`https://abc.cunny.dev/createRender`, values, { timeout: 6000000 })
+      return Timeout.wrap(promise, 6000000, 'Mutation timeout!');
     },
   })
 

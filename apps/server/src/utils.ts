@@ -1,6 +1,7 @@
 import axios from 'axios'
 import FormData from 'form-data'
 import { ReadStream } from 'fs'
+import { birthdayWishes } from './constant'
 
 export const uploadToMirai = async (file: ReadStream) => {
   try {
@@ -42,4 +43,28 @@ export const generateVoice = async (
   const audioStream: string = data.audioStream
 
   return audioStream
+}
+
+export const randomEE = async (name: string, gender: "MALE" | "FEMALE") => {
+  const randomMessage1 = birthdayWishes[
+    Math.floor(Math.random() * birthdayWishes.length)
+  ].replace('_NAME_', name)
+  const randomMessage2 = birthdayWishes[
+    Math.floor(Math.random() * birthdayWishes.length)
+  ].replace('_NAME_', name)
+  const randomMessage3 = birthdayWishes[
+    Math.floor(Math.random() * birthdayWishes.length)
+  ].replace('_NAME_', name)
+  const randomMessage4 = birthdayWishes[
+    Math.floor(Math.random() * birthdayWishes.length)
+  ].replace('_NAME_', name)
+  const randomMessage =
+    `${randomMessage1} ` +
+    `${randomMessage2} ` +
+    `${randomMessage3} ` +
+    `${randomMessage4}`
+
+  const voice = await generateVoice(randomMessage, gender)
+
+  return { statusCode: 200, data: { message: randomMessage, voice } }
 }

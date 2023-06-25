@@ -4,11 +4,11 @@ import { bundle } from '@remotion/bundler'
 import { getCompositions, renderMedia } from '@remotion/renderer'
 import express from 'express'
 import { birthdayWishes } from './constant'
-import { generateVoice, uploadToMirai } from './utils'
-import axios from 'axios'
+import { generateVoice, uploadToMirai, randomEE } from './utils'
 import { createRender, getRender, updateRender } from './db'
 // @ts-ignore
-;(() => {
+;import { random } from 'remotion'
+(() => {
   const app = express()
   app.use(
     express.json({
@@ -44,17 +44,8 @@ import { createRender, getRender, updateRender } from './db'
   >('/createRender', async (req, res) => {
     const { name, gender } = req.body
     try {
-      const response = (
-        await axios.post<{
-          data: {
-            voice: string
-            message: string
-          }
-        }>(`https://abc.cunny.dev/random`, {
-          name,
-          gender,
-        }, { timeout: 600000 })
-      ).data
+      const response = await randomEE(name, gender)
+      console.log('RANDOM VOICE GOTTEM')
       const renderId = await createRender(req.body)
 
       const inputProps = {
@@ -72,10 +63,11 @@ import { createRender, getRender, updateRender } from './db'
       // Select the composition you want to render.
       const composition = comps.find(c => c.id === compositionId)
       // Ensure the composition exists
+      console.log('START COMPOSE')
       if (!composition) {
         throw new Error(`No composition with the ID ${compositionId} found`)
       }
-
+      console.log('GOD DAMN SLOW')
       const outputLocation = `out/${compositionId}.mp4`
       new Promise(async resolve => {
         try {

@@ -5,14 +5,15 @@ import {
   getInputProps,
 } from 'remotion'
 import { useCallback, useEffect, useState } from 'react'
-import { FamilyPreset } from './presets/Family'
-import { JapanPreset } from './presets/Japan'
-import { SadPreset } from './presets/Sad'
-import { ThammaPreset } from './presets/Thamma'
-import { WeebPreset } from './presets/Weeb'
+import { FamilyPreset } from '../presets/Family'
+import { JapanPreset } from '../presets/Japan'
+import { SadPreset } from '../presets/Sad'
+import { ThammaPreset } from '../presets/Thamma'
+import { WeebPreset } from '../presets/Weeb'
 import { audioBufferToDataUrl } from '@remotion/media-utils'
-import { SakoyPreset } from './presets/Saiyor'
-import './styles/style.css'
+import { SakoyPreset } from '../presets/Saiyor'
+import { MinimalPreset } from '../presets/Minimal'
+import '../styles/style.css'
 
 export const presets = {
   family: FamilyPreset, // finished
@@ -21,6 +22,7 @@ export const presets = {
   sakoy: SakoyPreset, // waiting source
   thamma: ThammaPreset,
   weeb: WeebPreset, // waiting source
+  minimal: MinimalPreset,
 }
 
 const { voice, randomSeed, theme } = getInputProps() as {

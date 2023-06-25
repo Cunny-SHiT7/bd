@@ -1,5 +1,5 @@
 import { Audio, Sequence, Video, staticFile } from 'remotion'
-import { BaseComposition, RandomNoise } from '../Composition'
+import { BaseComposition, RandomNoise } from '../modules/Composition'
 import { shuffleAndPickOne } from '../libs/stuff'
 
 export const WeebPreset = (props: {

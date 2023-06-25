@@ -1,5 +1,5 @@
 import { Audio, Sequence, Video, random, staticFile } from 'remotion'
-import { BaseComposition } from '../Composition'
+import { BaseComposition } from '../modules/Composition'
 
 const sounds = [
   'Astronomia-Rodhae.opus',

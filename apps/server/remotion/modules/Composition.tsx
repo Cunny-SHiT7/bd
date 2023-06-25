@@ -16,6 +16,7 @@ export const BaseComposition = (props: {
   voiceDelay?: number
   imageURL?: string
   randomSeed: string
+  hideOverlay?: boolean
 }) => {
   return (
     <AbsoluteFill className="items-center justify-center bg-black">
@@ -30,7 +31,7 @@ export const BaseComposition = (props: {
       </Sequence>
 
       {/* Weird Stuff */}
-      <BirthdaySprinkle seed={props.randomSeed} />
+      {!props.hideOverlay && <BirthdaySprinkle seed={props.randomSeed} />}
     </AbsoluteFill>
   )
 }

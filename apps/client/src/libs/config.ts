@@ -1,4 +1,5 @@
 export const themes = [
   'family',
-  'sakoy'
+  'sakoy',
+  'minimal'
 ]

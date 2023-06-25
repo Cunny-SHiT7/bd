@@ -1,5 +1,5 @@
 import { Audio, Video, staticFile } from 'remotion'
-import { BaseComposition } from '../Composition'
+import { BaseComposition } from '../modules/Composition'
 import { shuffleAndPickOne } from '../libs/stuff'
 
 export const FamilyPreset = (props: {

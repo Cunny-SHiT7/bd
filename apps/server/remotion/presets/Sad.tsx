@@ -1,5 +1,5 @@
 import { Audio, Sequence, Video, staticFile } from 'remotion'
-import { BaseComposition } from '../Composition'
+import { BaseComposition } from '../modules/Composition'
 
 export const SadPreset = (props: { voiceData: string }) => {
   return (

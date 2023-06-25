@@ -12,12 +12,16 @@ const sounds = [
   'YangDumb.opus',
 ]
 
-export const SakoyPreset = (props: { voiceData: string }) => {
+export const SakoyPreset = (props: {
+  voiceData: string
+  randomSeed: string
+}) => {
   return (
     <BaseComposition
       audioBuffer={props.voiceData}
       voiceDelay={40}
       pictureDelay={20}
+      randomSeed={props.randomSeed}
     >
       <Sequence from={20} className="z-10 scale-[2] tranform">
         <Video
@@ -29,7 +33,7 @@ export const SakoyPreset = (props: { voiceData: string }) => {
       <Audio
         src={staticFile(
           `/presets/sakoy/sound/${
-            sounds[Math.floor(random(props.voiceData) * sounds.length)]
+            sounds[Math.floor(random(props.randomSeed) * sounds.length)]
           }`
         )}
         volume={0.3}

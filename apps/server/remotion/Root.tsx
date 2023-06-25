@@ -11,8 +11,7 @@ import { SadPreset } from './presets/Sad'
 import { ThammaPreset } from './presets/Thamma'
 import { WeebPreset } from './presets/Weeb'
 import { audioBufferToDataUrl } from '@remotion/media-utils'
-import { SakoyPreset } from './presets/SaiyorPreset'
-import { data } from './test'
+import { SakoyPreset } from './presets/Saiyor'
 import './styles/style.css'
 
 export const presets = {
@@ -24,11 +23,15 @@ export const presets = {
   weeb: WeebPreset, // waiting source
 }
 
-const { voice } = getInputProps() as {
+const { voice, randomSeed, theme } = getInputProps() as {
   message: string
   voice: string
+  randomSeed: string
+  theme: string
 }
+
 // const voice = data.data.voice
+// const randomSeed = 'gaysextest'
 
 export const RemotionRoot: React.FC = () => {
   const [handle] = useState(() => delayRender())
@@ -58,7 +61,8 @@ export const RemotionRoot: React.FC = () => {
       {audioData && (
         <Composition
           id="MyComposition"
-          component={presets['weeb']}
+          // @ts-ignore
+          component={presets[theme]}
           durationInFrames={
             parseInt((audioData.voiceDuration * 30).toFixed(0)) + 90
           }
@@ -68,6 +72,7 @@ export const RemotionRoot: React.FC = () => {
           defaultProps={{
             voiceData: audioData.voiceData,
             voiceDuration: audioData.voiceDuration,
+            randomSeed,
           }}
         />
       )}

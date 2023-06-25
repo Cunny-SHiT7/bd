@@ -1,21 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './pages/App.tsx'
-import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { QueryClientProvider, QueryClient } from 'react-query'
-import SharePage from './pages/SharePage.tsx'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+import IndexPage from './pages/index.tsx'
+import RenderInformationPage from './pages/[renderId]/index.tsx'
+import './index.css'
 
 const client = new QueryClient()
 
 const routes = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <IndexPage />,
   },
   {
-    path: '/share/:theme/:name',
-    element: <SharePage />,
+    path: '/:renderId',
+    element: <RenderInformationPage />,
   },
 ])
 

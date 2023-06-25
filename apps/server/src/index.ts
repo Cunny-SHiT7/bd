@@ -53,7 +53,8 @@ import queue from 'express-queue'
     any,
     {
       name: string
-      gender: 'MALE' | 'FEMALE'
+      gender: 'MALE' | 'FEMALE',
+      theme: string
     }
   >('/createRender', async (req, res) => {
     const { name, gender } = req.body
@@ -69,9 +70,13 @@ import queue from 'express-queue'
           gender,
         })
       ).data
+      const renderId = await createRender(req.body)
+
       const inputProps = {
         voice: response.data.voice,
         message: response.data.message,
+        randomSeed: renderId,
+        theme: req.body.theme,
       }
       const bundled = await bundle(path.join(__dirname, '../remotion/index.ts'))
       // Extract all the compositions you have defined in your project
@@ -86,7 +91,6 @@ import queue from 'express-queue'
         throw new Error(`No composition with the ID ${compositionId} found`)
       }
 
-      const renderId = await createRender(req.body)
       const outputLocation = `out/${compositionId}.mp4`
       new Promise(async resolve => {
         try {

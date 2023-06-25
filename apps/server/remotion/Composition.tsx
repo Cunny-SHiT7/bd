@@ -15,11 +15,11 @@ export const BaseComposition = (props: {
   pictureDelay?: number
   voiceDelay?: number
   imageURL?: string
+  randomSeed: string
 }) => {
   return (
     <AbsoluteFill className="items-center justify-center bg-black">
       {props.children}
-      <BirthdaySprinkle seed={props.audioBuffer} />
       <Sequence name="Picture" from={props.pictureDelay}>
         {props.imageURL && (
           <Img src={staticFile(props.imageURL)} className="w-full h-full" />
@@ -28,7 +28,29 @@ export const BaseComposition = (props: {
       <Sequence name="Audio" from={props.voiceDelay}>
         <Audio src={props.audioBuffer} volume={1} />
       </Sequence>
+
+      {/* Weird Stuff */}
+      <BirthdaySprinkle seed={props.randomSeed} />
     </AbsoluteFill>
+  )
+}
+
+export const RandomNoise = (props: {
+  seed: string
+  durationLength: number
+}) => {
+  const randomCoordinates = new Array(40).fill(true).map((a, i) => {
+    return +(random(`random-x-${i}`) * props.durationLength * 100).toFixed(0)
+  })
+
+  return (
+    <>
+      {randomCoordinates.map(_ => (
+        <Sequence from={_}>
+          <Audio src={staticFile('boom.mp3')} />
+        </Sequence>
+      ))}
+    </>
   )
 }
 

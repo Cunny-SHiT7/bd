@@ -1,11 +1,13 @@
-import { Audio, Video, random, staticFile } from 'remotion'
+import { Audio, Video, staticFile } from 'remotion'
 import { BaseComposition } from '../Composition'
+import { shuffleAndPickOne } from '../libs/stuff'
 
 export const FamilyPreset = (props: {
   voiceData: string
   voiceDuration: number
+  randomSeed: string
 }) => {
-  const FamilyVideos = [
+  const Videos = [
     'Birthday_Cake_with_candles.webm',
     'Bouncy_Cake.mp4',
     'Fuji_Firework_Show.webm',
@@ -14,7 +16,7 @@ export const FamilyPreset = (props: {
     'HBD_Footage2.webm',
     'HBD-Footage4.webm',
   ]
-  const FamilyAudios = [
+  const Audios = [
     'AuayPornWanKerd-Arisman.opus',
     'AuayPornWanKerd-Chairat_WongKietKachorn.opus',
     'AuayPornWanKerd-Tanin_Innthep.opus',
@@ -34,28 +36,23 @@ export const FamilyPreset = (props: {
       audioBuffer={props.voiceData}
       voiceDelay={20}
       pictureDelay={20}
+      randomSeed={props.randomSeed}
     >
       <Video
         src={staticFile(
-          `/presets/family/video/${
-            FamilyVideos[
-              Math.floor(
-                random(props.voiceDuration + '-video') * FamilyVideos.length
-              )
-            ]
-          }`
+          `/presets/family/video/${shuffleAndPickOne(
+            Videos,
+            props.randomSeed + '-video'
+          )}`
         )}
         className="absolute w-full h-full"
       />
       <Audio
         src={staticFile(
-          `/presets/family/sound/${
-            FamilyAudios[
-              Math.floor(
-                random(props.voiceDuration + '-audio') * FamilyAudios.length
-              )
-            ]
-          }`
+          `/presets/family/sound/${shuffleAndPickOne(
+            Audios,
+            props.randomSeed + '-audio'
+          )}`
         )}
         volume={0.4}
       />

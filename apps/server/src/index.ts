@@ -57,6 +57,7 @@ import { createRender, getRender, updateRender } from './db'
       const bundled = await bundle(path.join(__dirname, '../remotion/index.ts'), () => { return }, {
         outDir: path.join(__dirname, '../out'),
       })
+      fs.writeFileSync(path.join(__dirname, '../out/bundled.txt'), bundled)
       console.log('FILE BUNDLED')
       // Extract all the compositions you have defined in your project
       // from the webpack bundle.

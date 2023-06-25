@@ -24,6 +24,8 @@ export const SakoyPreset = (props: {
     '5.webm',
     '6.webm',
     '7.webm',
+    '8.webm',
+    '9.webm',
   ]
 
   return (

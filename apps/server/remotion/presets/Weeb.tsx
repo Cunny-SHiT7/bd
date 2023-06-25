@@ -5,7 +5,7 @@ export const WeebPreset = (props: {
   voiceDuration: number
   randomSeed: string
 }) => {
-  const Videos = ['1.webm', '2.webm']
+  const Videos = ['1.webm', '2.webm', '3.webm']
   const Audios = [
     'IDOL[CUT].opus',
     'kuwaikute_gomen[CUT].opus',

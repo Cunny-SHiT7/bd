@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "tsup src --watch --onSuccess \"node dist/index.js\"",
-    "build": "tsup src/index.ts --minify --clean"
+    "build": "tsup src/index.ts --minify --clean",
+    "start": "node dist/index.js"
   },
   "dependencies": {
     "@remotion/bundler": "^3.3.102",
